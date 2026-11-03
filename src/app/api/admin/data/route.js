@@ -1,40 +1,38 @@
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/admin-auth";
 import { getServiceSupabase } from "@/lib/supabase";
 
-/**
- * Minimal protection: require a shared secret header for phase 1.
- * Replace with proper Supabase Auth session checks before production.
- */
-export async function GET(req) {
-  const secret = req.headers.get("x-admin-secret");
-  if (!process.env.ADMIN_API_SECRET || secret !== process.env.ADMIN_API_SECRET) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+export async function GET() {
+  const { ok } = await requireAdmin();
+  if (!ok) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const supabase = getServiceSupabase();
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("id, parent_name, parent_email, child_first_name, child_class, city, status, created_at, batches(name)")
-    .order("created_at", { ascending: false })
-    .limit(200);
 
-  const { data: leads } = await supabase
-    .from("leads")
-    .select("id, name, email, phone, created_at")
-    .order("created_at", { ascending: false })
-    .limit(200);
+  const [enr, leads, batches, paid] = await Promise.all([
+    supabase
+      .from("enrollments")
+      .select("id, status, created_at", { count: "exact" }),
+    supabase.from("leads").select("id", { count: "exact", head: true }),
+    supabase.from("batches").select("id, is_open, seats_taken, seat_limit"),
+    supabase
+      .from("enrollments")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "confirmed"),
+  ]);
 
-  const rows = (enrollments || []).map((e) => ({
-    id: e.id,
-    parent_name: e.parent_name,
-    parent_email: e.parent_email,
-    child_first_name: e.child_first_name,
-    child_class: e.child_class,
-    city: e.city,
-    status: e.status,
-    created_at: e.created_at,
-    batch_name: e.batches?.name,
-  }));
+  const statusCounts = { pending: 0, confirmed: 0, cancelled: 0, refunded: 0 };
+  (enr.data || []).forEach((e) => {
+    if (statusCounts[e.status] != null) statusCounts[e.status] += 1;
+  });
 
-  return NextResponse.json({ enrollments: rows, leads: leads || [] });
+  return NextResponse.json({
+    stats: {
+      totalEnrollments: enr.count || 0,
+      confirmed: paid.count || statusCounts.confirmed,
+      pending: statusCounts.pending,
+      totalLeads: leads.count || 0,
+      openBatches: (batches.data || []).filter((b) => b.is_open).length,
+    },
+    statusCounts,
+  });
 }
