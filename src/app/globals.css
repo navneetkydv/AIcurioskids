@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #1F2A5C;
-  --color-accent: #F5A524;
-  --color-secondary: #1FA2A6;
-  --color-bg: #FAF8F4;
-  --color-section: #EEF1FB;
-  --color-body: #1C2033;
-  --color-muted: #5B6178;
-  --color-success: #2E9E6B;
-  --color-white: #FFFFFF;
+  --color-primary: #1f2a5c;
+  --color-accent: #f5a524;
+  --color-secondary: #1fa2a6;
+  --color-bg: #faf8f4;
+  --color-section: #eef1fb;
+  --color-body: #1c2033;
+  --color-muted: #5b6178;
+  --color-success: #2e9e6b;
+  --color-white: #ffffff;
   --radius: 14px;
   --shadow-soft: 0 4px 20px rgba(31, 42, 92, 0.08);
 }
@@ -42,7 +42,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading), Georgia, serif;
     line-height: 1.25;
     font-weight: 600;
@@ -85,7 +90,9 @@
     border-radius: 12px;
     border: none;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
     box-shadow: 0 2px 8px rgba(245, 165, 36, 0.35);
     text-decoration: none;
   }
@@ -163,17 +170,43 @@
   .book-shadow {
     animation: book-shadow 6s ease-in-out infinite;
   }
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.06)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 24px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      0 10px 40px rgba(0, 0, 0, 0.25);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+  }
 }
 
 /* ---------- Keyframes ---------- */
 @keyframes book-float {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50%      { transform: translateY(-14px) rotate(1deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1deg);
+  }
 }
 
 @keyframes book-shadow {
-  0%, 100% { transform: scaleX(1);   opacity: 0.35; }
-  50%      { transform: scaleX(0.8); opacity: 0.2; }
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleX(0.8);
+    opacity: 0.2;
+  }
 }
 
 /* ---------- Reduced motion (keep unlayered so it always wins) ---------- */

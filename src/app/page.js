@@ -90,12 +90,26 @@ const worldOfWorkStats = [
     body: "globally, as per Goldman Sachs. Understanding AI — not just using it — becomes highly relevant in this scenario.",
   },
 ];
+const PRICE_ORIGINAL = 10000;
+const PRICE_OFFER = 4500;
+const SAVE_PERCENT = Math.round((1 - PRICE_OFFER / PRICE_ORIGINAL) * 100);
+const formatINR = (n) => `₹${n.toLocaleString("en-IN")}`;
 
 export default function HomePage() {
   return (
     <>
-      <section className="bg-[var(--color-primary)] text-white overflow-hidden">
+      <section className="relative bg-[var(--color-primary)] text-white overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute  -left-24 md:top-8 top-30 h-72 w-72 rounded-full bg-[var(--color-accent)]/30 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-secondary/30 blur-3xl"
+        />
+
         <div className="container-wide py-12 md:py-20">
+          {/* grid */}
           <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
             {/* Text */}
             <div className="order-2 md:order-1">
@@ -106,30 +120,64 @@ export default function HomePage() {
               </h1>
               <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed">
                 A 4-week live online classes that change how your child sees and
-                uses AI. <br></br> They learn how AI works, how to ask better questions,
-                and how to use it safely.{" "}
+                uses AI. <br></br> They learn how AI works, how to ask better
+                questions, and how to use it safely.{" "}
                 <span className="italic">(for Class 4–9)</span>
                 <br></br>
-                <span className="font-semibold text-white">
+                {/* <span className="font-semibold text-white">
                   FREE book included.
-                </span>
+                </span> */}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Link href="/enroll" className="btn-primary text-center">
-                  Enroll in the Live Course
-                </Link>
-                {/* <Link
-                  href="/course"
-                  className="btn-secondary border-white text-white hover:bg-white/10 text-center"
-                >
-                  See what&apos;s inside
-                </Link> */}
-                <div className="flex flex-wrap gap-4">
-                  <DownloadBrochureButton
-                    label="Download Brochure"
-                    className="btn-secondary-light text-white"
-                  />
+              <div className="mb-8">
+                <div className="glass-card w-full max-w-md p-5 sm:p-6">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                    Early bird offer
+                  </span>
+
+                  <div className="mt-4 flex flex-wrap items-end gap-x-3 gap-y-1">
+                    <p className="text-4xl font-semibold leading-none tracking-tight sm:text-5xl">
+                      <span className="sr-only">Offer price </span>
+                      {formatINR(PRICE_OFFER)}
+                    </p>
+                    <p className="pb-1 text-lg text-white/60 sm:text-xl">
+                      <span className="sr-only">Original price </span>
+                      <s>{formatINR(PRICE_ORIGINAL)}</s>
+                    </p>
+                    <p className="pb-1 text-sm font-medium text-[var(--color-accent)]">
+                      Save {SAVE_PERCENT}%
+                    </p>
+                  </div>
+
+                  <Link
+                    href="/enroll"
+                    className="btn-primary mt-5 w-full text-center leading-snug"
+                  >
+                    Enroll in Live Class + &ldquo;AI for Students&rdquo; Book
+                  </Link>
+
+                  <p className="mt-3 flex items-center justify-center gap-2 text-sm text-white/80">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M21 8l-9-5-9 5v8l9 5 9-5V8z" />
+                      <path d="M3 8l9 5 9-5M12 13v8" />
+                    </svg>
+                    Book delivered free at home
+                  </p>
                 </div>
+
+                <DownloadBrochureButton
+                  label="Download brochure"
+                  className="mt-4 inline-block text-sm text-white/70 underline underline-offset-4 transition-colors hover:text-white"
+                />
               </div>
               <ul className="flex flex-wrap gap-2.5">
                 {trustItems.map((t) => (
@@ -170,7 +218,9 @@ export default function HomePage() {
       </section>
 
       {/* World of work — AI job stats (light background) */}
-      <section className="py-14 md:py-20 bg-[var(--color-bg)]">
+      <section className="relative py-14 md:py-20 bg-[var(--color-bg)]">
+
+
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl text-center text-[var(--color-primary)] mb-3">
             The world of work is being rewritten by AI
@@ -204,7 +254,7 @@ export default function HomePage() {
         </div>
       </section>
       <UpcomingBatches />
-       <BookShowcase />
+      <BookShowcase />
       <section className="section-tint py-14 md:py-20">
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl text-center mb-3">
@@ -247,7 +297,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-     
+
       <section className="section-tint py-14 md:py-20">
         <div className="container-wide">
           <div className="card max-w-2xl mx-auto">
@@ -320,7 +370,9 @@ export default function HomePage() {
           </p> */}
         </div>
       </section>
-<Mentors />
+      <div className="">
+        <Mentors />
+      </div>
       <section className="py-16 md:py-24">
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl mb-4">

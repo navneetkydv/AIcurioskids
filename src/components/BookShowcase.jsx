@@ -10,7 +10,10 @@ const tags = [
 ];
 export default function BookShowcase() {
   return (
-    <section className="py-16 md:py-24 bg-blue-50" aria-labelledby="book-showcase-title">
+    <section
+      className="py-16 md:py-24 bg-blue-50"
+      aria-labelledby="book-showcase-title"
+    >
       <div className="container-wide grid items-center gap-12 md:grid-cols-2 md:gap-16">
         {/* Book image */}
         <div className="order-1 flex justify-center md:order-2">
@@ -39,10 +42,13 @@ export default function BookShowcase() {
             id="book-showcase-title"
             className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight md:text-4xl"
           >
-            Explore the Book 
+            Explore the Book
           </h2>
           <p className="mx-auto mt-4 max-w-md text-base opacity-80 md:mx-0 md:text-lg">
-            <span className="font-italic">'AI for Students' </span> is a beginner-friendly guide designed especially for Class 4-9 students who want to explore Artificial Intelligence in a simple, practical, and engaging way — with no coding required.
+            <span className="font-italic">'AI for Students' </span> is a
+            beginner-friendly guide designed especially for Class 4-9 students
+            who want to explore Artificial Intelligence in a simple, practical,
+            and engaging way — with no coding required.
           </p>
           <ul
             className="mt-6 flex flex-wrap justify-center gap-2 md:justify-start"
@@ -63,19 +69,29 @@ export default function BookShowcase() {
             </Link>
 
             {amazonUrl && (
-            <a
-  href={amazonUrl}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn-secondary gap-2 hover:bg-[var(--color-primary)] hover:text-white"
->
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="9" cy="20" r="1.5" />
-    <circle cx="18" cy="20" r="1.5" />
-    <path d="M2 3h3l2.7 12.4a1 1 0 001 .8h9.3a1 1 0 001-.8L21 7H6" />
-  </svg>
-  Buy on Amazon
-</a>
+              <a
+                href={amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary gap-2 hover:bg-[var(--color-primary)] hover:text-white"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="9" cy="20" r="1.5" />
+                  <circle cx="18" cy="20" r="1.5" />
+                  <path d="M2 3h3l2.7 12.4a1 1 0 001 .8h9.3a1 1 0 001-.8L21 7H6" />
+                </svg>
+                Buy on Amazon
+              </a>
             )}
           </div>
         </div>
