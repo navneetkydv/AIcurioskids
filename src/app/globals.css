@@ -130,6 +130,27 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(31, 42, 92, 0.05);
 }
 
+.btn-secondary-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 12px;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-secondary-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .card {
   background: var(--color-white);
   border-radius: var(--radius);

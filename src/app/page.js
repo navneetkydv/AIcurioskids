@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import UpcomingBatches from "@/components/UpcomingBatches";
+import DownloadBrochureButton from "@/components/DownloadBrochureButton";
 export const metadata = {
   title: "Home",
   description:
@@ -48,10 +49,26 @@ const overviewCards = [
 ];
 
 const weeks = [
-  { week: 1, title: "Meet AI", desc: "What AI is, daily-life examples, how it learns." },
-  { week: 2, title: "Talk to AI", desc: "Better questions, clear prompts, getting useful answers." },
-  { week: 3, title: "Create and learn", desc: "Understanding concepts, generating ideas, mini projects." },
-  { week: 4, title: "Stay safe, think ahead", desc: "Privacy, wrong answers, responsible use, future opportunities." },
+  {
+    week: 1,
+    title: "Meet AI",
+    desc: "What AI is, daily-life examples, how it learns.",
+  },
+  {
+    week: 2,
+    title: "Talk to AI",
+    desc: "Better questions, clear prompts, getting useful answers.",
+  },
+  {
+    week: 3,
+    title: "Create and learn",
+    desc: "Understanding concepts, generating ideas, mini projects.",
+  },
+  {
+    week: 4,
+    title: "Stay safe, think ahead",
+    desc: "Privacy, wrong answers, responsible use, future opportunities.",
+  },
 ];
 
 const worldOfWorkStats = [
@@ -86,24 +103,34 @@ export default function HomePage() {
                 Do they know when it&apos;s wrong?
               </h1>
               <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed">
-                A 4-week live online course for Class 5–8 students that teaches how AI works,
-                how to ask better questions, and how to use it safely. Complete book included free.
+                A 4-week live online course that change how your child sees and uses AI. They learn
+                how AI works, how to ask better questions, and how to use it
+                safely.{" "}<span className="italic">(for Class 4–9 students)</span><br></br>
+                <span className="font-semibold text-white">
+                  Complete book included FREE.
+                </span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link href="/enroll" className="btn-primary text-center">
                   Enroll in the Live Course
                 </Link>
-                <Link
+                {/* <Link
                   href="/course"
                   className="btn-secondary border-white text-white hover:bg-white/10 text-center"
                 >
                   See what&apos;s inside
-                </Link>
+                </Link> */}
+                <div className="flex flex-wrap gap-4">
+                  <DownloadBrochureButton
+                    label="Download Brochure"
+                    className="btn-secondary-light text-black"
+                  />
+                </div>
               </div>
               <p className="text-sm text-white/70 flex flex-wrap gap-x-3 gap-y-1">
                 {trustItems.map((t, i) => (
                   <span key={t}>
-                    { <span className="mr-3 opacity-50">·</span>}
+                    {<span className="mr-3 opacity-50">·</span>}
                     {t}
                   </span>
                 ))}
@@ -114,7 +141,7 @@ export default function HomePage() {
             <div className="order-1 md:order-2 relative">
               <div className="relative aspect-[4/3] md:aspect-square max-w-md mx-auto md:max-w-none rounded-2xl overflow-hidden shadow-soft bg-white/10 border border-white/15">
                 <Image
-                  src="/hero4.png"
+                  src="/hero.png"
                   alt="Children learning AI — Class 5 to 8 students exploring technology together"
                   fill
                   priority
@@ -132,15 +159,15 @@ export default function HomePage() {
         </div>
       </section>
 
-          {/* World of work — AI job stats (light background) */}
+      {/* World of work — AI job stats (light background) */}
       <section className="py-14 md:py-20 bg-[var(--color-bg)]">
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl text-center text-[var(--color-primary)] mb-3">
             The world of work is being rewritten by AI
           </h2>
           <p className="text-center text-[var(--color-muted)] mb-12 max-w-2xl mx-auto">
-            Today&apos;s Class 5–8 students will enter a job market shaped by AI.
-            Understanding it early is not optional — it is preparation.
+            Today&apos;s Class 5–8 students will enter a job market shaped by
+            AI. Understanding it early is not optional — it is preparation.
           </p>
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {worldOfWorkStats.map((s) => (
@@ -151,65 +178,65 @@ export default function HomePage() {
                 <p className="text-4xl md:text-5xl font-semibold text-[var(--color-accent)] mb-2 tracking-tight">
                   {s.value}
                 </p>
-                <p className="text-base font-semibold text-[var(--color-primary)] mb-3">{s.label}</p>
-                <p className="text-sm text-[var(--color-muted)] leading-relaxed">{s.body}</p>
+                <p className="text-base font-semibold text-[var(--color-primary)] mb-3">
+                  {s.label}
+                </p>
+                <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+                  {s.body}
+                </p>
               </div>
             ))}
           </div>
           <p className="text-center text-xs text-[var(--color-muted)] mt-8">
-            Sources: IMF estimates; projected AI job creation to 2030; Goldman Sachs on jobs exposed to AI-driven automation.
+            Sources: IMF estimates; projected AI job creation to 2030; Goldman
+            Sachs on jobs exposed to AI-driven automation.
           </p>
         </div>
       </section>
-
-   <section className="bg-primary py-16 md:py-24">
-  <div className="container-wide">
-
-    <div className="max-w-2xl mx-auto text-center mb-14">
-      <span className="text-accent text-sm font-semibold uppercase tracking-widest">
-        The Learning Experience
-      </span>
-
-      <h2 className="text-white text-3xl md:text-4xl mt-4 mb-5">
-        Learn what matters.
-        <span className="block">
-          Think. Experiment. Create. Build.
-        </span>
-      </h2>
-
-      <p className="text-white/75 text-base md:text-lg">
-        Four weeks that change how your child sees,
-        understands, and uses AI.
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-3 gap-6">
-      {overviewCards.map((c) => (
-        <div
-          key={c.title}
-          className="bg-white rounded-2xl p-8 text-center
-          shadow-lg transition-all duration-300
-          hover:-translate-y-2 hover:shadow-xl"
-        >
-          <div className="w-16 h-16 mx-auto mb-5
-            flex items-center justify-center
-            rounded-2xl bg-section text-3xl">
-            {c.icon}
-          </div>
-
-          <h3 className="text-primary text-xl mb-3">
-            {c.title}
-          </h3>
-
-          <p className="text-muted text-[15px] leading-7">
-            {c.body}
+      <UpcomingBatches />
+      <section className="section-tint py-14 md:py-20">
+        <div className="container-wide">
+          <h2 className="text-2xl md:text-3xl text-center mb-3">
+            Kids use AI every day. Nobody has taught them how.
+          </h2>
+          <p className="text-center prose-muted mb-10 max-w-xl mx-auto">
+            Using AI is easy. Understanding it is the real skill.
           </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {problemPoints.map((p) => (
+              <div key={p.title} className="card">
+                <h3 className="text-lg mb-2">{p.title}</h3>
+                <p className="text-[var(--color-muted)] text-[15px]">
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
+      </section>
 
-  </div>
-</section>
+      <section className="py-14 md:py-20">
+        <div className="container-wide">
+          <h2 className="text-2xl md:text-3xl text-center mb-3">
+            Learn what matters. Think. Experiment. Create. Build.
+          </h2>
+          <p className="text-center prose-muted mb-12">
+            Four weeks that change how your child sees and uses AI.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {overviewCards.map((c) => (
+              <div key={c.title} className="card text-center">
+                <div className="text-3xl mb-3">{c.icon}</div>
+                <h3 className="text-lg mb-2">{c.title}</h3>
+                <p className="text-[var(--color-muted)] text-[15px]">
+                  {c.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-tint py-14 md:py-20">
         <div className="container-wide">
           <div className="card max-w-2xl mx-auto">
@@ -243,7 +270,9 @@ export default function HomePage() {
 
       <section className="py-14 md:py-20">
         <div className="container-wide">
-          <h2 className="text-2xl md:text-3xl text-center mb-10">What your child will learn</h2>
+          <h2 className="text-2xl md:text-3xl text-center mb-10">
+            What your child will learn
+          </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {weeks.map((w) => (
               <div key={w.week} className="card">
@@ -256,7 +285,10 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/course" className="text-[var(--color-secondary)] font-medium underline underline-offset-2">
+            <Link
+              href="/course"
+              className="text-[var(--color-secondary)] font-medium underline underline-offset-2"
+            >
               Full course details →
             </Link>
           </div>
@@ -267,9 +299,10 @@ export default function HomePage() {
         <div className="container-wide max-w-2xl text-center">
           <h2 className="text-2xl md:text-3xl mb-4">Why parents trust us</h2>
           <p className="prose-muted mb-6">
-            We studied AI for 4+ years in engineering and noticed children use AI daily,
-            but few get taught how it works or how to question it. This course closes that gap —
-            with clear explanations, hands-on practice, and a strong focus on safety.
+            We studied AI for 4+ years in engineering and noticed children use
+            AI daily, but few get taught how it works or how to question it.
+            This course closes that gap — with clear explanations, hands-on
+            practice, and a strong focus on safety.
           </p>
           <p className="text-sm text-[var(--color-muted)]">
             [Testimonials will appear here once we have real parent feedback.]
@@ -283,7 +316,8 @@ export default function HomePage() {
             Give your child&apos;s curiosity a new direction.
           </h2>
           <p className="prose-muted mb-8 max-w-lg mx-auto">
-            Join the next live batch. Complete workbook included free with every enrollment.
+            Join the next live batch. Complete workbook included free with every
+            enrollment.
           </p>
           <Link href="/enroll" className="btn-primary">
             Enroll Now

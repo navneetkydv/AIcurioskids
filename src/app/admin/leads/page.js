@@ -60,7 +60,7 @@ export default function AdminLeadsPage() {
       body: JSON.stringify({ crm_notes: notesDraft[id] ?? "" }),
     });
     if (!res.ok) {
-      alert("Could not save notes. Run the CRM SQL migration first.");
+      // alert("Could not save notes. Run the CRM SQL migration first.");
       return;
     }
     await load();

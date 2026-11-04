@@ -17,6 +17,7 @@ export default function EnrollPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(enrollSchema),
@@ -25,6 +26,9 @@ export default function EnrollPage() {
       terms: undefined,
     },
   });
+
+  const selectedBatchId = watch("batch_id");
+  const selectedBatch = batches.find((b) => b.id === selectedBatchId);
 
   useEffect(() => {
     async function load() {
@@ -210,13 +214,41 @@ export default function EnrollPage() {
                   <option value="">Choose a batch</option>
                   {batches.map((b) => (
                     <option key={b.id} value={b.id}>
-                      {b.name} · starts {b.start_date}
+                      {b.short_label || b.name} · starts {b.start_date}
                       {b.seats_left !== null ? ` · ${b.seats_left} seats left` : ""} · ₹{b.price_inr}
                     </option>
                   ))}
                 </select>
               )}
               {errors.batch_id && <p className="text-red-600 text-sm mt-1">{errors.batch_id.message}</p>}
+
+              {selectedBatch && (
+                <div className="mt-4 rounded-2xl border border-[var(--color-section)] bg-[var(--color-section)]/60 p-4">
+                  <p className="text-sm text-[var(--color-muted)] mb-1">You will pay</p>
+                  <div className="flex flex-wrap items-baseline gap-3">
+                    <span className="text-2xl font-semibold text-[var(--color-primary)]">
+                      ₹{selectedBatch.price_inr.toLocaleString("en-IN")}
+                    </span>
+                    {selectedBatch.display_price_inr &&
+                    selectedBatch.display_price_inr > selectedBatch.price_inr ? (
+                      <>
+                        <span className="text-base text-[var(--color-muted)] line-through">
+                          ₹{selectedBatch.display_price_inr.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs font-medium text-[var(--color-success)] bg-white/80 px-2 py-0.5 rounded-full">
+                          Save ₹
+                          {(
+                            selectedBatch.display_price_inr - selectedBatch.price_inr
+                          ).toLocaleString("en-IN")}
+                        </span>
+                      </>
+                    ) : null}
+                  </div>
+                  <p className="text-xs text-[var(--color-muted)] mt-2">
+                    Book included free · Secure payment via Razorpay (UPI / cards / netbanking)
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="space-y-3 pt-2">
