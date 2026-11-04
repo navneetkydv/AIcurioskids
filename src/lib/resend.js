@@ -21,7 +21,7 @@ export async function sendEnrollmentConfirmation({
   await resend.emails.send({
     from: fromEmail,
     to,
-    subject: `Enrollment confirmed – [Brand Name] AI Course`,
+    subject: `Enrollment confirmed – AIcuriosKids AI Course`,
     html: `
       <p>Hi ${parentName},</p>
       <p>Thank you for enrolling <strong>${childName}</strong> in the 4-week live AI course.</p>
@@ -30,7 +30,7 @@ export async function sendEnrollmentConfirmation({
       <strong>Amount paid:</strong> ₹${amount}</p>
       <p>You will receive batch details and the WhatsApp group link shortly.</p>
       <p>If you have questions, reply to this email or message us on WhatsApp.</p>
-      <p>— [Brand Name] Team</p>
+      <p>— AIcuriosKids Team</p>
     `,
   });
 }

@@ -32,24 +32,24 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "[Brand Name] | Think. Create. Build with AI.",
-    template: "%s | [Brand Name]",
+    default: "AIcuriosKids | Think. Create. Build with AI.",
+    template: "%s | AIcuriosKids",
   },
   description:
-    "A 4-week live online AI course for Class 5-8 students. Learn how AI works, ask better questions, and use it safely. Complete workbook included free.",
+    "A 4-week live online AI course for Class 4-9 students. Learn how AI works, ask better questions, and use it safely. Complete workbook included free.",
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "[Brand Name]",
-    title: "[Brand Name] | Think. Create. Build with AI.",
+    siteName: "AIcuriosKids",
+    title: "AIcuriosKids | Think. Create. Build with AI.",
     description:
-      "A 4-week live online AI course for Class 5-8 students. Complete workbook included free.",
+      "A 4-week live online AI course for Class 4-9 students. Complete workbook included free.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "[Brand Name] | Think. Create. Build with AI.",
+    title: "AIcuriosKids | Think. Create. Build with AI.",
     description:
-      "A 4-week live online AI course for Class 5-8 students. Complete workbook included free.",
+      "A 4-week live online AI course for Class 4-9 students. Complete workbook included free.",
   },
   robots: {
     index: true,

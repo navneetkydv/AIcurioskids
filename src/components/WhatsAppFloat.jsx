@@ -3,7 +3,7 @@
 export default function WhatsAppFloat() {
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "91XXXXXXXXXX";
   const message = encodeURIComponent(
-    "Hi! I'm interested in the 4-week live AI course for my child (Class 5-8)."
+    "Hi! I'm interested in the 4-week live AI course for my child ."
   );
   const href = `https://wa.me/${number.replace(/\D/g, "")}?text=${message}`;
 

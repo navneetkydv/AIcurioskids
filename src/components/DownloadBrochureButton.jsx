@@ -106,7 +106,7 @@ export default function DownloadBrochureButton({
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                    className="w-full text-black rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
                   />
                 </div>
 
@@ -119,7 +119,7 @@ export default function DownloadBrochureButton({
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                    className="w-full text-black rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
                   />
                 </div>
 
@@ -132,7 +132,7 @@ export default function DownloadBrochureButton({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="9876543210"
-                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                    className="w-full text-black rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
                   />
                 </div>
 

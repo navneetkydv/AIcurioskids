@@ -7,11 +7,9 @@ export default function RefundPage() {
   return (
     <section className="py-14">
       <div className="container-narrow prose-muted">
-        <p className="text-sm font-semibold text-amber-700 bg-amber-50 px-3 py-2 rounded-lg mb-8">
-          Draft — review with a lawyer and set your actual refund window before publishing.
-        </p>
+       
         <h1 className="text-3xl text-[var(--color-primary)] mb-6">Refund Policy</h1>
-        <p className="text-sm mb-8">Last updated: [date]</p>
+        <p className="text-sm mb-8">Last updated: [November 2026]</p>
 
         <h2 className="text-xl text-[var(--color-primary)] mt-8 mb-3">1. Overview</h2>
         <p>
@@ -33,7 +31,7 @@ export default function RefundPage() {
 
         <h2 className="text-xl text-[var(--color-primary)] mt-8 mb-3">4. How to request</h2>
         <p>
-          Email [email] from the parent email used at enrollment, with the payment ID / order ID
+          Email from the parent email used at enrollment, with the payment ID / order ID
           and reason. We aim to process approved refunds within [7–10] business days to the
           original payment method via Razorpay.
         </p>

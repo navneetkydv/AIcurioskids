@@ -1,4 +1,4 @@
-# [Brand Name] – Marketing + Enrollment Website
+# AIcuriosKids – Marketing + Enrollment Website
 
 Production-ready Next.js site for a children’s AI education brand.
 
@@ -73,8 +73,8 @@ Later: add Supabase Auth email login + allowlist for `ADMIN_EMAIL` and protect `
 
 | Placeholder | Where |
 |-------------|--------|
-| `[Brand Name]` | Header, footer, metadata, emails, legal |
-| `[email]`, `[phone]` | Footer, contact, legal |
+| `AIcuriosKids` | Header, footer, metadata, emails, legal |
+| `hello@aicurioskids.in]`, `[phone]` | Footer, contact, legal |
 | `[WhatsApp number]` | `.env` → `NEXT_PUBLIC_WHATSAPP_NUMBER` |
 | `[Amazon URL]` | `.env` → `NEXT_PUBLIC_AMAZON_URL` |
 | `[₹X]` price | Course page display + **batches.price_inr** in DB |

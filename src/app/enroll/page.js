@@ -69,7 +69,7 @@ export default function EnrollPage() {
         key: json.keyId,
         amount: json.amount,
         currency: json.currency,
-        name: "[Brand Name]",
+        name: "AIcuriosKids",
         description: `AI Course – ${json.batchName}`,
         order_id: json.orderId,
         prefill: {

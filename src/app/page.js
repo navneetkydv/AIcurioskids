@@ -1,17 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import UpcomingBatches from "@/components/UpcomingBatches";
+import BookShowcase from "@/components/BookShowcase";
 import DownloadBrochureButton from "@/components/DownloadBrochureButton";
+import Mentors from "@/components/Mentors";
 export const metadata = {
   title: "Home",
   description:
-    "Your child already uses AI. Do they know when it's wrong? A 4-week live online AI course for Class 5-8 students. Complete book included free.",
+    "Your child already uses AI. Do they know when it's wrong? A 4-week live online AI classes for Class 4-9 students. Complete book included free.",
 };
 
 const trustItems = [
   "Live classes",
-  "40+ hands-on activities",
   "No coding required",
+  "40+ hands-on activities",
   "Designed by engineering graduates",
 ];
 
@@ -97,17 +99,19 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
             {/* Text */}
             <div className="order-2 md:order-1">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-5">
+              <h1 className="text-2xl md:text-2xl lg:text-3xl font-semibold text-white leading-tight mb-5">
                 Your child already uses AI.
                 <br />
                 Do they know when it&apos;s wrong?
               </h1>
               <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed">
-                A 4-week live online course that change how your child sees and uses AI. They learn
-                how AI works, how to ask better questions, and how to use it
-                safely.{" "}<span className="italic">(for Class 4–9 students)</span><br></br>
+                A 4-week live online classes that change how your child sees and
+                uses AI. <br></br> They learn how AI works, how to ask better questions,
+                and how to use it safely.{" "}
+                <span className="italic">(for Class 4–9)</span>
+                <br></br>
                 <span className="font-semibold text-white">
-                  Complete book included FREE.
+                  FREE book included.
                 </span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -123,18 +127,24 @@ export default function HomePage() {
                 <div className="flex flex-wrap gap-4">
                   <DownloadBrochureButton
                     label="Download Brochure"
-                    className="btn-secondary-light text-black"
+                    className="btn-secondary-light text-white"
                   />
                 </div>
               </div>
-              <p className="text-sm text-white/70 flex flex-wrap gap-x-3 gap-y-1">
-                {trustItems.map((t, i) => (
-                  <span key={t}>
-                    {<span className="mr-3 opacity-50">·</span>}
+              <ul className="flex flex-wrap gap-2.5">
+                {trustItems.map((t) => (
+                  <li
+                    key={t}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"
+                    />
                     {t}
-                  </span>
+                  </li>
                 ))}
-              </p>
+              </ul>
             </div>
 
             {/* Hero image */}
@@ -166,7 +176,7 @@ export default function HomePage() {
             The world of work is being rewritten by AI
           </h2>
           <p className="text-center text-[var(--color-muted)] mb-12 max-w-2xl mx-auto">
-            Today&apos;s Class 5–8 students will enter a job market shaped by
+            Today&apos;s Class 4-9 students will enter a job market shaped by
             AI. Understanding it early is not optional — it is preparation.
           </p>
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
@@ -194,6 +204,7 @@ export default function HomePage() {
         </div>
       </section>
       <UpcomingBatches />
+       <BookShowcase />
       <section className="section-tint py-14 md:py-20">
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl text-center mb-3">
@@ -236,7 +247,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+     
       <section className="section-tint py-14 md:py-20">
         <div className="container-wide">
           <div className="card max-w-2xl mx-auto">
@@ -252,7 +263,7 @@ export default function HomePage() {
               </div>
               <div>
                 <dt className="text-[var(--color-muted)]">For</dt>
-                <dd className="font-semibold">Class 5–8</dd>
+                <dd className="font-semibold">Class 4-9</dd>
               </div>
               <div>
                 <dt className="text-[var(--color-muted)]">Bonus</dt>
@@ -304,12 +315,12 @@ export default function HomePage() {
             This course closes that gap — with clear explanations, hands-on
             practice, and a strong focus on safety.
           </p>
-          <p className="text-sm text-[var(--color-muted)]">
+          {/* <p className="text-sm text-[var(--color-muted)]">
             [Testimonials will appear here once we have real parent feedback.]
-          </p>
+          </p> */}
         </div>
       </section>
-
+<Mentors />
       <section className="py-16 md:py-24">
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl mb-4">

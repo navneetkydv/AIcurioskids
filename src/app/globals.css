@@ -27,10 +27,156 @@
   --font-body: var(--font-dm-sans);
 }
 
-html {
-  scroll-behavior: smooth;
+/* ---------- Base element styles ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-body);
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), Georgia, serif;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
 }
 
+/* ---------- Reusable component classes ---------- */
+@layer components {
+  .container-narrow {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .container-wide {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 8px rgba(245, 165, 36, 0.35);
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(245, 165, 36, 0.45);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 12px;
+    border: 2px solid var(--color-primary);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(31, 42, 92, 0.05);
+  }
+
+  .btn-secondary-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 12px;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    text-decoration: none;
+  }
+
+  .btn-secondary-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 1.5rem;
+  }
+
+  .section-tint {
+    background-color: var(--color-section);
+  }
+
+  .prose-muted {
+    color: var(--color-muted);
+  }
+
+  .book-float {
+    animation: book-float 6s ease-in-out infinite;
+  }
+
+  .book-shadow {
+    animation: book-shadow 6s ease-in-out infinite;
+  }
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes book-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-14px) rotate(1deg); }
+}
+
+@keyframes book-shadow {
+  0%, 100% { transform: scaleX(1);   opacity: 0.35; }
+  50%      { transform: scaleX(0.8); opacity: 0.2; }
+}
+
+/* ---------- Reduced motion (keep unlayered so it always wins) ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -42,126 +188,4 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-body);
-  font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 17px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), Georgia, serif;
-  line-height: 1.25;
-  font-weight: 600;
-}
-
-/* Focus styles for a11y */
-:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 2px;
-}
-
-/* Utility classes */
-.container-narrow {
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.container-wide {
-  max-width: 1120px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: var(--color-accent);
-  color: var(--color-primary);
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.875rem 1.75rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  box-shadow: 0 2px 8px rgba(245, 165, 36, 0.35);
-  text-decoration: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(245, 165, 36, 0.45);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: transparent;
-  color: var(--color-primary);
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.875rem 1.75rem;
-  border-radius: 12px;
-  border: 2px solid var(--color-primary);
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  text-decoration: none;
-}
-
-.btn-secondary:hover {
-  background-color: rgba(31, 42, 92, 0.05);
-}
-
-.btn-secondary-light {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: transparent;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.875rem 1.75rem;
-  border-radius: 12px;
-  border: 2px solid white;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  text-decoration: none;
-}
-
-.btn-secondary-light:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.card {
-  background: var(--color-white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
-  padding: 1.5rem;
-}
-
-.section-tint {
-  background-color: var(--color-section);
-}
-
-.prose-muted {
-  color: var(--color-muted);
 }

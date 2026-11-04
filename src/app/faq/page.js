@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "FAQ",
-  description: "Frequently asked questions about the 4-week live AI course for Class 5-8.",
+  description: "Frequently asked questions about the 4-week live AI course for Class 4-9.",
 };
 
 const faqs = [

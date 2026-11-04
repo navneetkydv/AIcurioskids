@@ -46,7 +46,7 @@ export default function Header() {
             style={{ position: "relative", zIndex: 60 }}
             onClick={() => setOpen(false)}
           >
-            [Brand Name]
+            AIcuriosKids
           </Link>
 
           {/* Desktop */}

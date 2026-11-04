@@ -111,7 +111,7 @@ export default function ContactPage() {
               </a>
             </p>
             <p className="mt-2">
-              Email: <a href="mailto:[email]" className="underline">[email]</a>
+              Email: <a href="mailto:hello@aicurioskids.in" className="underline">hello@aicurioskids.in</a>
             </p>
           </div>
         </div>

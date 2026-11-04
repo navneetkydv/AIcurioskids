@@ -7,11 +7,9 @@ export default function TermsPage() {
   return (
     <section className="py-14">
       <div className="container-narrow prose-muted">
-        <p className="text-sm font-semibold text-amber-700 bg-amber-50 px-3 py-2 rounded-lg mb-8">
-          Draft — review with a lawyer before publishing.
-        </p>
+
         <h1 className="text-3xl text-[var(--color-primary)] mb-6">Terms of Service</h1>
-        <p className="text-sm mb-8">Last updated: [date]</p>
+        <p className="text-sm mb-8">Last updated: [November, 2026]</p>
 
         <h2 className="text-xl text-[var(--color-primary)] mt-8 mb-3">1. Agreement</h2>
         <p>
@@ -21,7 +19,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl text-[var(--color-primary)] mt-8 mb-3">2. Eligibility</h2>
         <p>
-          The course is for students in Class 5–8. Enrollment must be completed by a parent or
+          The course is for students in Class 4-9. Enrollment must be completed by a parent or
           legal guardian who has authority to consent to the child&apos;s participation.
         </p>
 
@@ -40,7 +38,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl text-[var(--color-primary)] mt-8 mb-3">5. Intellectual property</h2>
         <p>
-          Course materials, workbook content, and website content are owned by [Brand Name] or its
+          Course materials, workbook content, and website content are owned by AIcuriosKids or its
           licensors. You may use them for personal learning only; redistribution or commercial use
           is not permitted.
         </p>
@@ -53,8 +51,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl text-[var(--color-primary)] mt-8 mb-3">7. Governing law</h2>
         <p>
-          These terms are governed by the laws of India. Courts in [city, e.g. Ludhiana / Delhi]
-          shall have jurisdiction.
+          These terms are governed by the laws of India.
         </p>
       </div>
     </section>

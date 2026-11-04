@@ -3,17 +3,17 @@ import Link from "next/link";
 export const metadata = {
   title: "The 4-Week Live AI Course",
   description:
-    "Live online AI course for Class 5-8. 4 weeks, hands-on activities, complete workbook included free. Enroll now.",
+    "Live online AI course for Class 4-9. 4 weeks, hands-on activities, complete workbook included free. Enroll now.",
 };
 
 const facts = [
   { label: "Duration", value: "4 weeks" },
   { label: "Format", value: "Live online" },
-  { label: "For", value: "Class 5–8" },
-  { label: "Batch size", value: "[X]" },
-  { label: "Sessions", value: "[X per week, X minutes]" },
-  { label: "Next batch", value: "[date]" },
-  { label: "Bonus", value: "Complete workbook free" },
+  { label: "For", value: "Class 4–9" },
+  // { label: "Batch size", value: "[X]" },
+  { label: "Sessions", value: "[2 per week, 90 minutes]" },
+  // { label: "Next batch", value: "[date]" },
+  { label: "Bonus", value: "Complete workbook FREE (delivered at  your home)" },
 ];
 
 const weeks = [
@@ -52,23 +52,23 @@ const learnings = [
 const included = [
   "Live interactive classes",
   "Complete “AI for Students” workbook free (8 chapters, 40+ activities)",
-  "[Video lectures via QR – only if true]",
-  "[Certificate – only if true]",
-  "[Doubt support – only if true]",
+  "Hands-on activities and mini projects",
+  "Certificate of completion( available both digitally and physically delivered at home)  ",
+  "24*7 support for parents and students",
 ];
 
 export default function CoursePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: "4-Week Live AI Course for Class 5-8",
+    name: "4-Week Live AI Course for Class 4-9",
     description:
       "Live online course that teaches how AI works, how to ask better questions, and how to use it safely.",
     provider: {
       "@type": "Organization",
-      name: "[Brand Name]",
+      name: "AIcuriosKids",
     },
-    educationalLevel: "Class 5-8",
+    educationalLevel: "Class 4-9",
     inLanguage: "en",
   };
 
@@ -85,7 +85,7 @@ export default function CoursePage() {
             The 4-Week Live AI Course
           </h1>
           <p className="text-lg text-white/85 max-w-2xl mb-8">
-            Live classes for Class 5–8 students. Think clearly about AI, practice safely,
+            Live classes for Class 4–9 students. Think clearly about AI, practice safely,
             and create with confidence. Complete workbook included free.
           </p>
           <Link href="/enroll" className="btn-primary">
@@ -180,7 +180,7 @@ export default function CoursePage() {
         <div className="container-wide max-w-2xl">
           <h2 className="text-2xl md:text-3xl mb-4">Who it is for</h2>
           <p className="prose-muted mb-6">
-            Parents of children in Class 5–8 in India who want their child to understand AI —
+            Parents of children in Class 4-9 in India who want their child to understand AI —
             not just use it. No prior coding knowledge is required. A laptop or tablet with a
             stable internet connection is enough.
           </p>
@@ -189,9 +189,9 @@ export default function CoursePage() {
             We studied AI for 4+ years in engineering and noticed children use AI daily,
             but few get taught how it works or how to question it. This course closes that gap.
           </p>
-          <p className="text-sm text-[var(--color-muted)] mt-6">
+          {/* <p className="text-sm text-[var(--color-muted)] mt-6">
             [Testimonials placeholder — will be replaced with real parent quotes.]
-          </p>
+          </p> */}
         </div>
       </section>
 
@@ -200,7 +200,7 @@ export default function CoursePage() {
           <h2 className="text-2xl md:text-3xl mb-4">
             Give your child&apos;s curiosity a new direction.
           </h2>
-          <p className="prose-muted mb-8">Complete workbook included free with enrollment.</p>
+          <p className="prose-muted mb-8">Complete workbook included FREE with enrollment.</p>
           <Link href="/enroll" className="btn-primary">
             Enroll Now
           </Link>
