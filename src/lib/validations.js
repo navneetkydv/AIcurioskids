@@ -17,15 +17,9 @@ export const enrollSchema = z.object({
     .string()
     .regex(/^(\+91)?[6-9]\d{9}$/, "Valid Indian mobile (+91) required"),
   child_first_name: z.string().min(1).max(50),
-  child_class: z.coerce.number().int().min(5).max(8),
+  child_class: z.coerce.number().int().min(4).max(9),
   city: z.string().min(2).max(80),
   batch_id: z.string().uuid(),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: "Parental consent is required" }),
-  }),
-  terms: z.literal(true, {
-    errorMap: () => ({ message: "You must accept Terms and Refund Policy" }),
-  }),
   website: z.string().max(0).optional(), // honeypot
   utm_source: z.string().max(100).optional(),
   utm_medium: z.string().max(100).optional(),

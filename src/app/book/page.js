@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BookShowcase from "@/components/BookShowcase";
 
 export const metadata = {
   title: "The Book – AI for Students",
@@ -59,7 +60,7 @@ export default function BookPage() {
           </a>
         </div>
       </section>
-
+< BookShowcase />
       <section className="py-14">
         <div className="container-wide">
           <h2 className="text-2xl mb-6">What your child will learn</h2>

@@ -51,9 +51,9 @@ export async function POST(req) {
         child_first_name: data.child_first_name,
         child_class: data.child_class,
         city: data.city,
-        consent_given: true,
-        consent_at: new Date().toISOString(),
-        consent_text_version: CONSENT_TEXT_VERSION,
+        consent_given: false,
+        consent_at: null,
+        consent_text_version: null,
         status: "pending",
         utm_source: data.utm_source || null,
         utm_medium: data.utm_medium || null,
@@ -62,10 +62,20 @@ export async function POST(req) {
       .select("id")
       .single();
 
-    if (enrErr || !enrollment) {
-      console.error("Enrollment insert failed");
-      return NextResponse.json({ error: "Could not create enrollment" }, { status: 500 });
-    }
+   if (enrErr || !enrollment) {
+  console.error("Enrollment insert failed:", enrErr);
+
+  return NextResponse.json(
+    {
+      error: "Could not create enrollment",
+      details: enrErr?.message,
+      code: enrErr?.code,
+      hint: enrErr?.hint,
+      detailsFromDatabase: enrErr?.details,
+    },
+    { status: 500 }
+  );
+}
 
     const amountPaise = batch.price_inr * 100;
     const order = await createRazorpayOrder({

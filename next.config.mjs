@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["10.55.199.163"],
+  allowedDevOrigins: ["10.250.174.163"],
   images: {
     formats: ["image/avif", "image/webp"],
   },
@@ -24,7 +24,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.supabase.co https://api.razorpay.com https://www.google-analytics.com https://www.facebook.com",
+              "connect-src 'self' https://*.supabase.co https://api.razorpay.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://connect.facebook.net",
               "frame-src https://api.razorpay.com https://checkout.razorpay.com",
               "object-src 'none'",
               "base-uri 'self'",

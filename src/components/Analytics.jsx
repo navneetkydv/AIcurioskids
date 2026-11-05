@@ -1,6 +1,8 @@
 "use client";
 
 import Script from "next/script";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 export function trackMetaEvent(event, params) {
   if (typeof window !== "undefined" && window.fbq) {
@@ -48,4 +50,19 @@ export function GALoader() {
       </Script>
     </>
   );
+}
+
+export function MetaPixelPageViews() {
+  const pathname = usePathname();
+  const first = useRef(true);
+
+  useEffect(() => {
+    if (first.current) {
+      first.current = false; // the loader already tracked the first view
+      return;
+    }
+    trackMetaEvent("PageView");
+  }, [pathname]);
+
+  return null;
 }

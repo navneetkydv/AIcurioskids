@@ -22,7 +22,7 @@ function Avatar({ mentor, size }) {
         alt={mentor.name}
         width={size}
         height={size}
-        className="rounded-full object-cover"
+        className="rounded-md"
         style={{ width: size, height: size }}
       />
     );
@@ -30,7 +30,7 @@ function Avatar({ mentor, size }) {
   return (
     <div
       aria-hidden="true"
-      className="flex items-center justify-center rounded-full bg-[var(--color-primary)] font-semibold text-white"
+      className="flex items-center justify-center rounded-md bg-[var(--color-primary)] font-semibold text-white"
       style={{ width: size, height: size, fontSize: size / 2.8 }}
     >
       {initials(mentor.name)}
@@ -53,7 +53,13 @@ function SocialLinks({ mentor }) {
           aria-label={`${mentor.name} on LinkedIn`}
           className={base}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
             <path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9.75h4v11.5H3V9.75zm6.5 0h3.83v1.57h.05c.53-1 1.84-2.07 3.78-2.07 4.04 0 4.79 2.66 4.79 6.12v5.88h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4V9.75z" />
           </svg>
         </a>
@@ -66,10 +72,26 @@ function SocialLinks({ mentor }) {
           aria-label={`${mentor.name} on Instagram`}
           className={base}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
             <rect x="3" y="3" width="18" height="18" rx="5" />
             <circle cx="12" cy="12" r="4" />
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            <circle
+              cx="17.5"
+              cy="6.5"
+              r="1"
+              fill="currentColor"
+              stroke="none"
+            />
           </svg>
         </a>
       )}
@@ -98,34 +120,43 @@ export default function Mentors() {
   }, [active]);
 
   return (
-    <section className="bg-blue-50 mx-auto py-4 md:py-10" aria-labelledby="mentors-title">
+    <section
+      className="bg-blue-50 mx-auto py-4 md:py-10"
+      aria-labelledby="mentors-title"
+    >
       <div className="container-wide">
-        <h2 id="mentors-title" className="mb-3 text-center text-2xl md:text-3xl">
-          Know your mentors
+        <h2
+          id="mentors-title"
+          className="mb-3 text-center text-2xl md:text-3xl"
+        >
+          Know your <span className="mentor-highlight">mentors</span>
         </h2>
         <p className="prose-muted mx-auto mb-10 max-w-2xl text-center md:mb-12">
-          Not a recorded course. Every module is delivered live by our mentors, who are experienced engineers and AI enthusiasts.
+          Not a recorded course. Every module is delivered live by our mentors,
+          who are experienced engineers and AI enthusiasts.
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-3xl mx-auto">
           {mentors.map((m) => (
-            <article key={m.id} className="card flex flex-col">
+            <article key={m.id} className="card !p-4 flex-col">
               <div className="mb-4 flex items-center gap-4">
-                <Avatar mentor={m} size={64} />
+                <Avatar mentor={m} size={180} />
                 <div className="min-w-0">
                   <h3 className="text-lg leading-snug">{m.name}</h3>
                   {m.role && (
-                    <p className="text-sm text-[var(--color-muted)]">{m.role}</p>
+                    <p className="text-sm text-muted">
+                      {m.role}
+                    </p>
                   )}
                 </div>
               </div>
 
-              <ul className="mb-1 space-y-2 text-[15px] text-[var(--color-muted)]">
+              <ul className="mb-1 space-y-2 text-[15px] text-muted">
                 {m.points.map((p) => (
                   <li key={p} className="flex gap-2.5">
                     <span
                       aria-hidden="true"
-                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]"
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
                     />
                     <span>{p}</span>
                   </li>
@@ -138,7 +169,7 @@ export default function Mentors() {
                     type="button"
                     onClick={() => setActive(m)}
                     aria-haspopup="dialog"
-                    className="font-medium text-[var(--color-secondary)] underline underline-offset-2"
+                    className="font-medium text-secondary underline underline-offset-2"
                   >
                     Learn more
                   </button>
@@ -171,7 +202,16 @@ export default function Mentors() {
               aria-label="Close"
               className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-muted)] hover:bg-[var(--color-section)]"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
                 <path d="M6 6l12 12M6 18L18 6" />
               </svg>
             </button>
@@ -183,7 +223,9 @@ export default function Mentors() {
                   {active.name}
                 </h3>
                 {active.role && (
-                  <p className="text-sm text-[var(--color-muted)]">{active.role}</p>
+                  <p className="text-sm text-[var(--color-muted)]">
+                    {active.role}
+                  </p>
                 )}
               </div>
             </div>

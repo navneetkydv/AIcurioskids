@@ -107,10 +107,10 @@ export default function UpcomingBatches() {
       <div className="container-wide">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
           <div>
-            <h2 className="text-2xl md:text-3xl text-[var(--color-primary)]">
+            <h2 className="text-2xl md:text-3xl text-primary">
               Explore Upcoming Batches
             </h2>
-            <p className="text-[var(--color-muted)] mt-2 text-sm md:text-base">
+            <p className="text-muted mt-2 text-sm md:text-base">
               Live classes · Morning and/or evening slots (IST)
             </p>
           </div>
@@ -120,11 +120,11 @@ export default function UpcomingBatches() {
         </div>
 
         {loading ? (
-          <p className="text-sm text-[var(--color-muted)]">Loading batches…</p>
+          <p className="text-sm text-muted">Loading batches…</p>
         ) : batches.length === 0 ? (
-          <div className="card text-sm text-[var(--color-muted)]">
+          <div className="card text-sm text--muted">
             No open batches yet. Check back soon or{" "}
-            <a href="/contact" className="underline text-[var(--color-secondary)]">
+            <a href="/contact" className="underline text-secondary">
               contact us
             </a>
             .
@@ -139,8 +139,8 @@ export default function UpcomingBatches() {
                   onClick={() => setActiveId(b.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     activeId === b.id
-                      ? "bg-[var(--color-primary)] text-white"
-                      : "bg-white text-[var(--color-primary)] border border-gray-200 hover:border-[var(--color-secondary)]"
+                      ? "bg-primary text-white"
+                      : "bg-white text-primary border border-gray-200 hover:border-secondary"
                   }`}
                 >
                   {b.label || b.short_label || b.name}
@@ -149,31 +149,31 @@ export default function UpcomingBatches() {
             </div>
 
             <div className="card">
-              <p className="font-semibold text-[var(--color-primary)] mb-1">
+              <p className="font-semibold text-primary mb-1">
                 {active?.label || active?.short_label || active?.name}
               </p>
               {active?.schedule_text && (
-                <p className="text-sm text-[var(--color-muted)] mb-2">{active.schedule_text}</p>
+                <p className="text-sm text-muted mb-2">{active.schedule_text}</p>
               )}
               {active?.price_inr != null && (
                 <p className="text-sm mb-4 flex flex-wrap items-baseline gap-2">
-                  <span className="font-semibold text-[var(--color-primary)] text-lg">
+                  <span className="font-semibold text-primary text-lg">
                     ₹{Number(active.price_inr).toLocaleString("en-IN")}
                   </span>
                   {active.display_price_inr &&
                   active.display_price_inr > active.price_inr ? (
-                    <span className="text-[var(--color-muted)] line-through">
+                    <span className="text-muted line-through">
                       ₹{Number(active.display_price_inr).toLocaleString("en-IN")}
                     </span>
                   ) : null}
-                  <a href="/enroll" className="text-[var(--color-secondary)] underline text-sm ml-1">
+                  <a href="/enroll" className="text-secondary underline text-sm ml-1">
                     Enroll
                   </a>
                 </p>
               )}
 
               {weekGroups.length === 0 ? (
-                <p className="text-[var(--color-muted)] text-sm py-4">
+                <p className="text-muted text-sm py-4">
                   Full timetable will be published soon.
                   {active?.start_date && (
                     <>
@@ -197,7 +197,7 @@ export default function UpcomingBatches() {
                           <button
                             type="button"
                             onClick={() => toggleWeek(index)}
-                            className="w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-[var(--color-primary)] bg-[var(--color-section)]"
+                            className="w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-primary bg-section"
                             aria-expanded={isOpen}
                           >
                             <span>{group.week}</span>
@@ -218,34 +218,34 @@ export default function UpcomingBatches() {
                                   key={j}
                                   className="border-b border-gray-100 last:border-0 pb-3 last:pb-0"
                                 >
-                                  <p className="text-sm font-medium text-[var(--color-body)] mb-2">
+                                  <p className="text-sm font-medium text-body mb-2">
                                     {row.day}
                                   </p>
                                   <div className="grid grid-cols-1 gap-1.5 text-sm">
                                     {row.morning && (
-                                      <p className="text-[var(--color-muted)]">
-                                        <span className="font-medium text-[var(--color-primary)]">
+                                      <p className="text-muted">
+                                        <span className="font-medium text-primary">
                                           Morning:{" "}
                                         </span>
                                         {row.morning}
                                       </p>
                                     )}
                                     {row.evening && (
-                                      <p className="text-[var(--color-muted)]">
-                                        <span className="font-medium text-[var(--color-primary)]">
+                                      <p className="text-muted">
+                                        <span className="font-medium text-primary">
                                           Evening:{" "}
                                         </span>
                                         {row.evening}
                                       </p>
                                     )}
                                     {!row.morning && !row.evening && (
-                                      <p className="text-[var(--color-muted)]">Timings TBA</p>
+                                      <p className="text-muted">Timings TBA</p>
                                     )}
                                   </div>
                                 </div>
                               ))}
                               {group.sessions.length === 0 && (
-                                <p className="text-sm text-[var(--color-muted)]">No sessions yet</p>
+                                <p className="text-sm text-muted">No sessions yet</p>
                               )}
                             </div>
                           )}
@@ -256,16 +256,16 @@ export default function UpcomingBatches() {
 
                   {/* Desktop: table */}
                   <div className="hidden md:block overflow-x-auto">
-                    <table className="w-full text-sm text-left min-w-[640px]">
+                    <table className="w-full text-sm text-left min-w-160">
                       <thead>
                         <tr className="border-b border-gray-200">
-                          <th className="py-3 pr-4 font-semibold text-[var(--color-muted)]">
+                          <th className="py-3 pr-4 font-semibold text-muted">
                             Day &amp; Date
                           </th>
-                          <th className="py-3 pr-4 font-semibold text-[var(--color-muted)]">
+                          <th className="py-3 pr-4 font-semibold text-muted">
                             Morning (IST)
                           </th>
-                          <th className="py-3 font-semibold text-[var(--color-muted)]">
+                          <th className="py-3 font-semibold text-muted">
                             Evening (IST)
                           </th>
                         </tr>
@@ -273,10 +273,10 @@ export default function UpcomingBatches() {
                       <tbody>
                         {(active?.schedule_sessions || []).map((row, i) =>
                           row.isWeekHeader ? (
-                            <tr key={`w-${i}`} className="bg-[var(--color-section)]">
+                            <tr key={`w-${i}`} className="bg-section">
                               <td
                                 colSpan={3}
-                                className="py-2 px-2 font-semibold text-[var(--color-primary)]"
+                                className="py-2 px-2 font-semibold text-primary"
                               >
                                 {row.week}
                               </td>
@@ -286,12 +286,12 @@ export default function UpcomingBatches() {
                               <td className="py-3 pr-4">{row.day}</td>
                               <td className="py-3 pr-4">
                                 {row.morning || (
-                                  <span className="text-[var(--color-muted)]">—</span>
+                                  <span className="text-muted">—</span>
                                 )}
                               </td>
                               <td className="py-3">
                                 {row.evening || (
-                                  <span className="text-[var(--color-muted)]">—</span>
+                                  <span className="text-muted">—</span>
                                 )}
                               </td>
                             </tr>
@@ -309,7 +309,7 @@ export default function UpcomingBatches() {
 
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          className="fixed inset-0 z-100 flex items-center justify-center p-4"
           style={{ backgroundColor: "rgba(28, 32, 51, 0.5)" }}
           onClick={() => status !== "loading" && setOpen(false)}
         >
@@ -317,14 +317,14 @@ export default function UpcomingBatches() {
             className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-1">
+            <h3 className="text-xl font-semibold text-primary mb-1">
               Download brochure
             </h3>
-            <p className="text-sm text-[var(--color-muted)] mb-5">
+            <p className="text-sm text-muted mb-5">
               Share your details and we&apos;ll start the download.
             </p>
             {status === "success" ? (
-              <p className="text-[var(--color-success)] font-medium py-4">
+              <p className="text-success font-medium py-4">
                 Thank you! Your download should start automatically.
               </p>
             ) : (
@@ -335,7 +335,7 @@ export default function UpcomingBatches() {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
                   />
                 </div>
                 <div>
@@ -345,7 +345,7 @@ export default function UpcomingBatches() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
                   />
                 </div>
                 <div>
@@ -355,7 +355,7 @@ export default function UpcomingBatches() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="9876543210"
-                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                    className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
                   />
                 </div>
                 {error && <p className="text-sm text-red-600">{error}</p>}

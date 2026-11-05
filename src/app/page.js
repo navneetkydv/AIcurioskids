@@ -4,6 +4,8 @@ import UpcomingBatches from "@/components/UpcomingBatches";
 import BookShowcase from "@/components/BookShowcase";
 import DownloadBrochureButton from "@/components/DownloadBrochureButton";
 import Mentors from "@/components/Mentors";
+import ContactForm from "@/components/ContactForm";
+import FAQ from "@/components/QuickAns";
 export const metadata = {
   title: "Home",
   description:
@@ -14,6 +16,7 @@ const trustItems = [
   "Live classes",
   "No coding required",
   "40+ hands-on activities",
+  "4 weeks program",
   "Designed by engineering graduates",
 ];
 
@@ -90,8 +93,9 @@ const worldOfWorkStats = [
     body: "globally, as per Goldman Sachs. Understanding AI — not just using it — becomes highly relevant in this scenario.",
   },
 ];
-const PRICE_ORIGINAL = 10000;
-const PRICE_OFFER = 4500;
+
+const PRICE_ORIGINAL = process.env.NEXT_PUBLIC_PRICE_ORIGINAL_HOME || 10000;
+const PRICE_OFFER = process.env.NEXT_PUBLIC_PRICE_OFFER_HOME   || 4500;
 const SAVE_PERCENT = Math.round((1 - PRICE_OFFER / PRICE_ORIGINAL) * 100);
 const formatINR = (n) => `₹${n.toLocaleString("en-IN")}`;
 
@@ -152,7 +156,7 @@ export default function HomePage() {
                     href="/enroll"
                     className="btn-primary mt-5 w-full text-center leading-snug"
                   >
-                    Enroll in Live Class + &ldquo;AI for Students&rdquo; Book
+                    Book your child&apos;s seat now
                   </Link>
 
                   <p className="mt-3 flex items-center justify-center gap-2 text-sm text-white/80">
@@ -170,7 +174,7 @@ export default function HomePage() {
                       <path d="M21 8l-9-5-9 5v8l9 5 9-5V8z" />
                       <path d="M3 8l9 5 9-5M12 13v8" />
                     </svg>
-                    Book delivered free at home
+                    Book delivered FREE at home
                   </p>
                 </div>
 
@@ -178,6 +182,12 @@ export default function HomePage() {
                   label="Download brochure"
                   className="mt-4 inline-block text-sm text-white/70 underline underline-offset-4 transition-colors hover:text-white"
                 />
+                <Link
+                    href="/book"
+                    className="mt-4 inline-block text-sm text-white/70 underline underline-offset-4 transition-colors hover:text-white ml-4"
+                  >
+                    Discover the book
+                  </Link>
               </div>
               <ul className="flex flex-wrap gap-2.5">
                 {trustItems.map((t) => (
@@ -219,8 +229,6 @@ export default function HomePage() {
 
       {/* World of work — AI job stats (light background) */}
       <section className="relative py-14 md:py-20 bg-[var(--color-bg)]">
-
-
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl text-center text-[var(--color-primary)] mb-3">
             The world of work is being rewritten by AI
@@ -233,21 +241,21 @@ export default function HomePage() {
             {worldOfWorkStats.map((s) => (
               <div
                 key={s.value}
-                className="rounded-2xl bg-white border border-[var(--color-section)] shadow-[var(--shadow-soft)] p-6 md:p-8 text-center md:text-left"
+                className="rounded-2xl bg-white border border-section shadow-[var(--shadow-soft)] p-6 md:p-8 text-center md:text-left"
               >
-                <p className="text-4xl md:text-5xl font-semibold text-[var(--color-accent)] mb-2 tracking-tight">
+                <p className="text-4xl md:text-5xl font-semibold text-accent mb-2 tracking-tight">
                   {s.value}
                 </p>
-                <p className="text-base font-semibold text-[var(--color-primary)] mb-3">
+                <p className="text-base font-semibold text-primary mb-3">
                   {s.label}
                 </p>
-                <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed">
                   {s.body}
                 </p>
               </div>
             ))}
           </div>
-          <p className="text-center text-xs text-[var(--color-muted)] mt-8">
+          <p className="text-center text-xs text-muted mt-8">
             Sources: IMF estimates; projected AI job creation to 2030; Goldman
             Sachs on jobs exposed to AI-driven automation.
           </p>
@@ -304,19 +312,19 @@ export default function HomePage() {
             <h2 className="text-2xl mb-6 text-center">Course at a glance</h2>
             <dl className="grid grid-cols-2 gap-4 text-sm mb-8">
               <div>
-                <dt className="text-[var(--color-muted)]">Duration</dt>
+                <dt className="text-muted">Duration</dt>
                 <dd className="font-semibold">4 weeks</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted)]">Format</dt>
+                <dt className="text-muted">Format</dt>
                 <dd className="font-semibold">Live online</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted)]">For</dt>
+                <dt className="text-muted">For</dt>
                 <dd className="font-semibold">Class 4-9</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-muted)]">Bonus</dt>
+                <dt className="text-muted">Bonus</dt>
                 <dd className="font-semibold">Full workbook free</dd>
               </div>
             </dl>
@@ -337,18 +345,18 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {weeks.map((w) => (
               <div key={w.week} className="card">
-                <span className="inline-block text-xs font-semibold uppercase tracking-wide text-[var(--color-secondary)] mb-2">
+                <span className="inline-block text-xs font-semibold uppercase tracking-wide text-secondary mb-2">
                   Week {w.week}
                 </span>
                 <h3 className="text-lg mb-1">{w.title}</h3>
-                <p className="text-[var(--color-muted)] text-sm">{w.desc}</p>
+                <p className="text-muted  text-sm">{w.desc}</p>
               </div>
             ))}
           </div>
           <div className="text-center mt-10">
             <Link
               href="/course"
-              className="text-[var(--color-secondary)] font-medium underline underline-offset-2"
+              className="text-secondary font-medium underline underline-offset-2"
             >
               Full course details →
             </Link>
@@ -373,7 +381,27 @@ export default function HomePage() {
       <div className="">
         <Mentors />
       </div>
-      <section className="py-16 md:py-24">
+
+          <h1 className="text-2xl mt-10 md:text-4xl text-center font-semibold">
+            Quick Answers
+          </h1>
+        <FAQ />
+      {/* contact form */}
+      <section className="bg-section">
+        <div className="container-wide py-8">
+          <div className="text-center mb-2">
+            <h2 className="text-3xl font-semibold text-primary">
+             Send us a message
+            </h2>
+            <p className="prose-muted mt-2">
+              Talk to us about our AI learning programs.
+            </p>
+          </div>
+
+          <ContactForm />
+        </div>
+      </section>
+            <section className="py-16 md:py-24">
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl mb-4">
             Give your child&apos;s curiosity a new direction.

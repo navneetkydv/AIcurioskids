@@ -13,11 +13,10 @@ export default function ThankYouPage() {
         <h1 className="text-3xl font-semibold mb-4">You&apos;re enrolled!</h1>
         <p className="prose-muted mb-6">
           Thank you. We have sent a confirmation email with batch details.
-          The next batch starts on <strong>[batch start date]</strong>.
         </p>
         <p className="prose-muted mb-8">
           Join the parent WhatsApp group for updates:{" "}
-          <a href="[WhatsApp group link]" className="text-[var(--color-secondary)] underline">
+          <a href={process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK} className="text-[var(--color-secondary)] underline">
             [WhatsApp group link]
           </a>
         </p>

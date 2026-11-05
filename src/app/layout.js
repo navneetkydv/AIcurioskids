@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import CookieConsent from "@/components/CookieConsent";
 import { UTMCapture } from "@/components/UTMCapture";
+import { MetaPixelLoader, GALoader } from "@/components/Analytics";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -71,6 +72,8 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-screen flex flex-col antialiased">
         <UTMCapture />
+        <MetaPixelLoader />
+        <GALoader />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

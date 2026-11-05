@@ -106,7 +106,7 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://instagram.com/[aicurioskids]"
+                  href="https://instagram.com/aicurioskids"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -128,14 +128,14 @@ export default function Footer() {
         <p className="mt-10 text-sm text-white/70">
           Registered under Udyam (Ministry of MSME, Government of India) · UDYAM-UP-30-0082811
         </p>
-         <a
+         {/* <a
     href="https://udyamregistration.gov.in/verifyudyambarcode.aspx?verifyudrn=KJEh05Nd/wNhotclHw/aP3UM7BpMTvQ3rDtFT4ml2x0="
     target="_blank"
     rel="noopener noreferrer"
     className="underline hover:text-white"
   >
     Verify on Udyam portal
-  </a>
+  </a> */}
         <div className="mt-4 pt-4 border-t border-white/15 text-center text-sm text-white/55">
           © {year} AIcuriosKids. All rights reserved.
         </div>
