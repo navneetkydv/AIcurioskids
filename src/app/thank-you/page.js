@@ -9,14 +9,14 @@ export default function ThankYouPage() {
   return (
     <section className="py-20">
       <div className="container-wide max-w-lg text-center">
-        <div className="text-4xl mb-4 text-[var(--color-success)]">✓</div>
+        <div className="text-4xl mb-4 text-success">✓</div>
         <h1 className="text-3xl font-semibold mb-4">You&apos;re enrolled!</h1>
         <p className="prose-muted mb-6">
           Thank you. We have sent a confirmation email with batch details.
         </p>
         <p className="prose-muted mb-8">
           Join the parent WhatsApp group for updates:{" "}
-          <a href={process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK} className="text-[var(--color-secondary)] underline">
+          <a href={process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK} className="text-secondary underline">
             [WhatsApp group link]
           </a>
         </p>

@@ -8,26 +8,26 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-[var(--color-primary)] text-white py-14">
+      <section className="bg-primary text-white py-14">
         <div className="container-wide">
           <h1 className="text-3xl md:text-4xl font-semibold text-white">About us</h1>
         </div>
       </section>
       <section className="py-14">
         <div className="container-wide  prose-muted">
-          <h2 className="text-2xl text-[var(--color-primary)] mb-4">Our story</h2>
-          <p className="mb-4 text-[var(--color-body)]">
+          <h2 className="text-2xl text-primary mb-4">Our story</h2>
+          <p className="mb-4 text-body">
             We studied AI for 4+ years in engineering and noticed a simple gap: children
             already use AI every day — for homework, curiosity, and entertainment — but almost
             nobody teaches them how it works, when to trust it, or how to stay safe.
           </p>
-          <p className="mb-4 text-[var(--color-body)]">
+          <p className="mb-4 text-body">
             AIcuriosKids was built to close that gap with clear explanations, hands-on practice,
             and a strong focus on responsibility. Our live course and the “AI for Students”
-            workbook are designed specifically for Class 5–8 learners in India.
+            workbook are designed specifically for Class 4-9 learners in India.
           </p>
-          <h2 className="text-2xl text-[var(--color-primary)] mb-4 mt-10">Mission</h2>
-          <p className="mb-4 text-[var(--color-body)]">
+          <h2 className="text-2xl text-primary mb-4 mt-10">Mission</h2>
+          <p className="mb-4 text-body">
             Help every child think clearly about AI — so they can create with it, question it,
             and use it wisely.
           </p>

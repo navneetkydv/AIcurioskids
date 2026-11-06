@@ -34,7 +34,7 @@ export default function AdminDashboard() {
 
   if (!stats && !error) {
     return (
-      <div className="p-8 text-center text-[var(--color-muted)]">Loading…</div>
+      <div className="p-8 text-center text-muted">Loading…</div>
     );
   }
 
@@ -49,13 +49,13 @@ export default function AdminDashboard() {
     <>
       <AdminNav email={email} />
       <div className="container-wide py-8">
-        <h1 className="text-2xl font-semibold text-[var(--color-primary)] mb-6">Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-primary mb-6">Dashboard</h1>
         {error && <p className="text-red-600 mb-4">{error}</p>}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {cards.map((c) => (
             <Link key={c.label} href={c.href} className="card hover:shadow-md transition-shadow">
-              <p className="text-sm text-[var(--color-muted)]">{c.label}</p>
-              <p className="text-3xl font-semibold text-[var(--color-primary)] mt-1">{c.value}</p>
+              <p className="text-sm text-muted">{c.label}</p>
+              <p className="text-3xl font-semibold text-primary mt-1">{c.value}</p>
             </Link>
           ))}
         </div>

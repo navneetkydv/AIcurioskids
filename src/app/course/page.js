@@ -79,7 +79,7 @@ export default function CoursePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="bg-[var(--color-primary)] text-white py-14 md:py-20">
+      <section className="bg-primary text-white py-14 md:py-20">
         <div className="container-wide">
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-4">
             The 4-Week Live AI Course
@@ -101,14 +101,14 @@ export default function CoursePage() {
               <tbody>
                 {facts.map((f) => (
                   <tr key={f.label} className="border-b border-gray-100 last:border-0">
-                    <th className="py-3 pr-4 font-medium text-[var(--color-muted)] w-1/3">
+                    <th className="py-3 pr-4 font-medium text-muted w-1/3">
                       {f.label}
                     </th>
                     <td className="py-3 font-semibold">{f.value}</td>
                   </tr>
                 ))}
                 <tr>
-                  <th className="py-3 pr-4 font-medium text-[var(--color-muted)]">Price</th>
+                  <th className="py-3 pr-4 font-medium text-muted">Price</th>
                   <td className="py-3 font-semibold text-lg">[₹X]</td>
                 </tr>
               </tbody>
@@ -128,14 +128,14 @@ export default function CoursePage() {
           <div className="grid md:grid-cols-2 gap-6">
             {weeks.map((w) => (
               <div key={w.week} className="card">
-                <span className="text-xs font-semibold uppercase tracking-wide text-[var(--color-secondary)]">
+                <span className="text-xs font-semibold uppercase tracking-wide text-secondary">
                   Week {w.week}
                 </span>
                 <h3 className="text-xl mt-1 mb-3">{w.title}</h3>
                 <ul className="space-y-1.5">
                   {w.items.map((item) => (
-                    <li key={item} className="flex gap-2 text-[var(--color-muted)] text-sm">
-                      <span className="text-[var(--color-success)]">✓</span>
+                    <li key={item} className="flex gap-2 text-muted text-sm">
+                      <span className="text-success">✓</span>
                       {item}
                     </li>
                   ))}
@@ -153,7 +153,7 @@ export default function CoursePage() {
             {learnings.map((l) => (
               <span
                 key={l}
-                className="px-4 py-2 rounded-full bg-[var(--color-section)] text-sm font-medium text-[var(--color-primary)]"
+                className="px-4 py-2 rounded-full bg-section text-sm font-medium text-primary"
               >
                 {l}
               </span>
@@ -168,7 +168,7 @@ export default function CoursePage() {
           <ul className="space-y-3">
             {included.map((item) => (
               <li key={item} className="flex gap-3 items-start">
-                <span className="text-[var(--color-success)] mt-0.5 shrink-0">✓</span>
+                <span className="text-success mt-0.5 shrink-0">✓</span>
                 <span>{item}</span>
               </li>
             ))}

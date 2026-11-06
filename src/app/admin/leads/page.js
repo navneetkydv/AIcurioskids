@@ -94,7 +94,7 @@ export default function AdminLeadsPage() {
       <AdminNav email={email} />
       <div className="container-wide py-8">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-          <h1 className="text-2xl font-semibold text-[var(--color-primary)]">Leads CRM</h1>
+          <h1 className="text-2xl font-semibold text-primary">Leads CRM</h1>
           <button type="button" onClick={exportCSV} className="btn-secondary !py-2 !px-3 text-sm">
             Export CSV
           </button>
@@ -133,7 +133,7 @@ export default function AdminLeadsPage() {
             <div key={l.id} className="card">
               <div className="flex flex-wrap justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-[var(--color-primary)]">{l.name}</p>
+                  <p className="font-semibold text-primary">{l.name}</p>
                   <p className="text-sm">
                     <a href={`mailto:${l.email}`} className="underline">
                       {l.email}
@@ -143,7 +143,7 @@ export default function AdminLeadsPage() {
                       {l.phone}
                     </a>
                   </p>
-                  <p className="text-xs text-[var(--color-muted)] mt-1">
+                  <p className="text-xs text-muted mt-1">
                     {new Date(l.created_at).toLocaleString()}
                     {l.utm_source ? ` · utm: ${l.utm_source}` : ""}
                   </p>
@@ -161,10 +161,10 @@ export default function AdminLeadsPage() {
                 </select>
               </div>
               {l.message && (
-                <p className="text-sm text-[var(--color-muted)] mt-3 border-t pt-3">{l.message}</p>
+                <p className="text-sm text-muted mt-3 border-t pt-3">{l.message}</p>
               )}
               <div className="mt-3">
-                <label className="text-xs font-medium text-[var(--color-muted)]">CRM notes</label>
+                <label className="text-xs font-medium text-muted">CRM notes</label>
                 <textarea
                   className="w-full mt-1 rounded-xl border px-3 py-2 text-sm"
                   rows={2}
@@ -175,7 +175,7 @@ export default function AdminLeadsPage() {
                 />
                 <button
                   type="button"
-                  className="mt-2 text-sm underline text-[var(--color-secondary)]"
+                  className="mt-2 text-sm underline text-secondary"
                   onClick={() => saveNotes(l.id)}
                 >
                   Save notes
@@ -184,7 +184,7 @@ export default function AdminLeadsPage() {
             </div>
           ))}
           {leads.length === 0 && (
-            <p className="text-sm text-[var(--color-muted)]">No leads yet.</p>
+            <p className="text-sm text-muted">No leads yet.</p>
           )}
         </div>
       </div>

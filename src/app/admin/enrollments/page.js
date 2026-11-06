@@ -78,7 +78,7 @@ export default function AdminEnrollmentsPage() {
       <AdminNav email={email} />
       <div className="container-wide py-8">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-          <h1 className="text-2xl font-semibold text-[var(--color-primary)]">Enrollments</h1>
+          <h1 className="text-2xl font-semibold text-primary">Enrollments</h1>
           <div className="flex gap-2 items-center">
             <select
               value={status}
@@ -118,12 +118,12 @@ export default function AdminEnrollmentsPage() {
                 <tr key={e.id} className="border-b border-gray-100 align-top">
                   <td className="py-2 pr-3">
                     <div className="font-medium">{e.parent_name}</div>
-                    <div className="text-xs text-[var(--color-muted)]">{e.parent_email}</div>
-                    <div className="text-xs text-[var(--color-muted)]">{e.parent_phone}</div>
+                    <div className="text-xs text-muted">{e.parent_email}</div>
+                    <div className="text-xs text-muted">{e.parent_phone}</div>
                   </td>
                   <td className="py-2 pr-3">
                     {e.child_first_name} · Class {e.child_class}
-                    <div className="text-xs text-[var(--color-muted)]">{e.city}</div>
+                    <div className="text-xs text-muted">{e.city}</div>
                   </td>
                   <td className="py-2 pr-3">{e.batch_name || "—"}</td>
                   <td className="py-2 pr-3">{e.status}</td>
@@ -148,7 +148,7 @@ export default function AdminEnrollmentsPage() {
             </tbody>
           </table>
           {rows.length === 0 && (
-            <p className="text-sm text-[var(--color-muted)] py-6">No enrollments found.</p>
+            <p className="text-sm text-muted py-6">No enrollments found.</p>
           )}
         </div>
       </div>

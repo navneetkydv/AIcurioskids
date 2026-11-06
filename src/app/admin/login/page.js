@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const hello@aicurioskids.in, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,8 +40,8 @@ export default function AdminLoginPage() {
         onSubmit={onSubmit}
         className="w-full max-w-sm bg-white rounded-2xl shadow-md border border-gray-100 p-6 space-y-4"
       >
-        <h1 className="text-xl font-semibold text-[var(--color-primary)]">Admin login</h1>
-        <p className="text-sm text-[var(--color-muted)]">
+        <h1 className="text-xl font-semibold text-primary">Admin login</h1>
+        <p className="text-sm text-muted">
           Protected area. Use the password from your server env.
         </p>
         <div>
@@ -50,7 +50,7 @@ export default function AdminLoginPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+            className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
             placeholder="you@domain.com"
             autoComplete="username"
           />
@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+            className="w-full rounded-xl border border-gray-200 px-3 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
             autoComplete="current-password"
           />
         </div>

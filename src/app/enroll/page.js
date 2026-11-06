@@ -125,7 +125,7 @@ export default function EnrollPage() {
         strategy="lazyOnload"
       />
 
-      <section className="bg-[var(--color-primary)] text-white py-12">
+      <section className="bg-primary text-white py-12">
         <div className="container-wide">
           <h1 className="text-3xl md:text-4xl font-semibold text-white">
             Enroll in the Live Course
@@ -153,7 +153,7 @@ export default function EnrollPage() {
               </label>
               <input
                 {...register("parent_name")}
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
               />
               {errors.parent_name && (
                 <p className="text-red-600 text-sm mt-1">
@@ -169,7 +169,7 @@ export default function EnrollPage() {
               <input
                 type="email"
                 {...register("parent_email")}
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
               />
               {errors.parent_email && (
                 <p className="text-red-600 text-sm mt-1">
@@ -185,7 +185,7 @@ export default function EnrollPage() {
               <input
                 {...register("parent_phone")}
                 placeholder="9876543210"
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
               />
               {errors.parent_phone && (
                 <p className="text-red-600 text-sm mt-1">
@@ -200,7 +200,7 @@ export default function EnrollPage() {
               </label>
               <input
                 {...register("child_first_name")}
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
               />
               {errors.child_first_name && (
                 <p className="text-red-600 text-sm mt-1">
@@ -215,7 +215,7 @@ export default function EnrollPage() {
               </label>
               <select
                 {...register("child_class")}
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
               >
                 <option value="">Select class</option>
                 <option value="4">Class 4</option>
@@ -236,7 +236,7 @@ export default function EnrollPage() {
               <label className="block text-sm font-medium mb-1.5">City</label>
               <input
                 {...register("city")}
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
               />
               {errors.city && (
                 <p className="text-red-600 text-sm mt-1">
@@ -250,11 +250,11 @@ export default function EnrollPage() {
                 Select batch
               </label>
               {loadingBatches ? (
-                <p className="text-sm text-[var(--color-muted)]">
+                <p className="text-sm text-muted">
                   Loading batches…
                 </p>
               ) : batches.length === 0 ? (
-                <p className="text-sm text-[var(--color-muted)]">
+                <p className="text-sm text-muted">
                   No open batches right now.{" "}
                   <Link href="/contact" className="underline">
                     Contact us
@@ -264,7 +264,7 @@ export default function EnrollPage() {
               ) : (
                 <select
                   {...register("batch_id")}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:ring-2 focus:ring-secondary"
                 >
                   <option value="">Choose a batch</option>
                   {batches.map((b) => (
@@ -285,25 +285,25 @@ export default function EnrollPage() {
               )}
 
               {selectedBatch && (
-                <div className="mt-4 rounded-2xl border border-[var(--color-section)] bg-[var(--color-section)]/60 p-4">
-                  <p className="text-sm text-[var(--color-muted)] mb-1">
+                <div className="mt-4 rounded-2xl border border-section bg-section/60 p-4">
+                  <p className="text-sm text-muted mb-1">
                     You will pay
                   </p>
                   <div className="flex flex-wrap items-baseline gap-3">
-                    <span className="text-2xl font-semibold text-[var(--color-primary)]">
+                    <span className="text-2xl font-semibold text-primary">
                       ₹{selectedBatch.price_inr.toLocaleString("en-IN")}
                     </span>
                     {selectedBatch.display_price_inr &&
                     selectedBatch.display_price_inr >
                       selectedBatch.price_inr ? (
                       <>
-                        <span className="text-base text-[var(--color-muted)] line-through">
+                        <span className="text-base text-muted line-through">
                           ₹
                           {selectedBatch.display_price_inr.toLocaleString(
                             "en-IN",
                           )}
                         </span>
-                        <span className="text-xs font-medium text-[var(--color-success)] bg-white/80 px-2 py-0.5 rounded-full">
+                        <span className="text-xs font-medium text-success bg-white/80 px-2 py-0.5 rounded-full">
                           Save ₹
                           {(
                             selectedBatch.display_price_inr -
@@ -313,7 +313,7 @@ export default function EnrollPage() {
                       </>
                     ) : null}
                   </div>
-                  <p className="text-xs text-[var(--color-muted)] mt-2">
+                  <p className="text-xs text-muted mt-2">
                     Book included free · Secure payment via Razorpay (UPI /
                     cards / netbanking)
                   </p>
@@ -365,7 +365,7 @@ export default function EnrollPage() {
               </button>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-[var(--color-muted)] pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted pt-2">
               <p className="text-primary text-sm">
                 We will contact you for book delivery and other updates after a
                 successful payment.

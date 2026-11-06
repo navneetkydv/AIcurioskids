@@ -24,7 +24,7 @@ export default function BookPage() {
 
   return (
     <>
-      <section className="bg-[var(--color-primary)] text-white py-14 md:py-20">
+      <section className="bg-primary text-white py-14 md:py-20">
         <div className="container-wide">
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-4">
             Prefer to learn at home? Get the book.
@@ -67,20 +67,20 @@ export default function BookPage() {
           <ul className="space-y-3 mb-12">
             {learnings.map((l) => (
               <li key={l} className="flex gap-3">
-                <span className="text-[var(--color-success)]">✓</span>
+                <span className="text-success">✓</span>
                 <span>{l}</span>
               </li>
             ))}
           </ul>
 
           <div className="card section-tint border-0">
-            <p className="text-[var(--color-body)] mb-4">
+            <p className="text-body mb-4">
               Want live guidance too? The book comes free with our 4-week live
               course.
             </p>
             <Link
               href="/course"
-              className="text-[var(--color-secondary)] font-semibold underline"
+              className="text-secondary font-semibold underline"
             >
               Explore the live course →
             </Link>

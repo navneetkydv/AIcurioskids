@@ -187,10 +187,10 @@ export default function AdminBatchesPage() {
     <>
       <AdminNav email={email} />
       <div className="container-wide py-8">
-        <h1 className="text-2xl font-semibold text-[var(--color-primary)] mb-2">
+        <h1 className="text-2xl font-semibold text-primary mb-2">
           Courses / Batches
         </h1>
-        <p className="text-sm text-[var(--color-muted)] mb-6">
+        <p className="text-sm text-muted mb-6">
           Open batches appear on the website (home + enroll). Set session days and optional
           morning/evening slots below.
         </p>
@@ -306,7 +306,7 @@ export default function AdminBatchesPage() {
           {/* Session schedule builder */}
           <div className="border-t pt-4 mt-2">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <h3 className="font-semibold text-[var(--color-primary)]">Session timetable</h3>
+              <h3 className="font-semibold text-primary">Session timetable</h3>
               <div className="flex gap-2">
                 <button type="button" onClick={addWeekHeader} className="text-sm btn-secondary !py-1.5 !px-3">
                   + Week header
@@ -316,14 +316,14 @@ export default function AdminBatchesPage() {
                 </button>
               </div>
             </div>
-            <p className="text-xs text-[var(--color-muted)] mb-3">
+            <p className="text-xs text-muted mb-3">
               Leave Morning or Evening empty if that batch only runs in one slot.
             </p>
             <div className="space-y-3">
               {form.schedule_sessions.map((s, i) =>
                 s.isWeekHeader ? (
-                  <div key={i} className="flex gap-2 items-center bg-[var(--color-section)] rounded-xl p-3">
-                    <span className="text-xs font-medium text-[var(--color-muted)] w-16">Week</span>
+                  <div key={i} className="flex gap-2 items-center bg-section rounded-xl p-3">
+                    <span className="text-xs font-medium text-muted w-16">Week</span>
                     <input
                       value={s.week || ""}
                       onChange={(e) => updateSession(i, "week", e.target.value)}
@@ -337,7 +337,7 @@ export default function AdminBatchesPage() {
                 ) : (
                   <div key={i} className="grid sm:grid-cols-4 gap-2 items-end border rounded-xl p-3">
                     <div className="sm:col-span-2">
-                      <label className="text-xs text-[var(--color-muted)]">Day & date</label>
+                      <label className="text-xs text-muted">Day & date</label>
                       <input
                         value={s.day || ""}
                         onChange={(e) => updateSession(i, "day", e.target.value)}
@@ -346,7 +346,7 @@ export default function AdminBatchesPage() {
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-[var(--color-muted)]">Morning (optional)</label>
+                      <label className="text-xs text-muted">Morning (optional)</label>
                       <input
                         value={s.morning || ""}
                         onChange={(e) => updateSession(i, "morning", e.target.value)}
@@ -356,7 +356,7 @@ export default function AdminBatchesPage() {
                     </div>
                     <div className="flex gap-2 items-end">
                       <div className="flex-1">
-                        <label className="text-xs text-[var(--color-muted)]">Evening (optional)</label>
+                        <label className="text-xs text-muted">Evening (optional)</label>
                         <input
                           value={s.evening || ""}
                           onChange={(e) => updateSession(i, "evening", e.target.value)}
@@ -372,14 +372,14 @@ export default function AdminBatchesPage() {
                 )
               )}
               {form.schedule_sessions.length === 0 && (
-                <p className="text-sm text-[var(--color-muted)]">
+                <p className="text-sm text-muted">
                   No sessions yet. Add week headers and session days.
                 </p>
               )}
             </div>
           </div>
 
-          {msg && <p className="text-sm text-[var(--color-secondary)]">{msg}</p>}
+          {msg && <p className="text-sm text-secondary">{msg}</p>}
           <div className="flex gap-3">
             <button type="submit" disabled={loading} className="btn-primary">
               {loading ? "Saving…" : editingId ? "Update batch" : "Create batch"}
@@ -429,18 +429,18 @@ export default function AdminBatchesPage() {
                   <td className="py-2 pr-3">
                     ₹{b.price_inr}
                     {b.display_price_inr && b.display_price_inr > b.price_inr ? (
-                      <span className="text-[var(--color-muted)] line-through ml-1 text-xs">
+                      <span className="text-muted line-through ml-1 text-xs">
                         ₹{b.display_price_inr}
                       </span>
                     ) : null}
                   </td>
                   <td className="py-2 pr-3">
-                    <span className={b.is_open ? "text-[var(--color-success)]" : "text-[var(--color-muted)]"}>
+                    <span className={b.is_open ? "text-success" : "text-muted"}>
                       {b.is_open ? "Open" : "Closed"}
                     </span>
                   </td>
                   <td className="py-2 pr-3 space-x-2 whitespace-nowrap">
-                    <button type="button" onClick={() => startEdit(b)} className="underline text-[var(--color-secondary)]">
+                    <button type="button" onClick={() => startEdit(b)} className="underline text-secondary">
                       Edit
                     </button>
                     <button type="button" onClick={() => toggleOpen(b)} className="underline">
