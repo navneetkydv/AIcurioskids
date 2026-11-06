@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { getServiceSupabase } from "@/lib/supabase";
 import { verifyWebhookSignature } from "@/lib/razorpay";
 import { sendEnrollmentConfirmation, sendAdminNotification } from "@/lib/resend";
@@ -11,6 +11,11 @@ export async function POST(req) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
+  const eventId = req.headers.get("x-razorpay-event-id");
+  if (!eventId) {
+    return NextResponse.json({ error: "Missing event id" }, { status: 400 });
+  }
+
   let event;
   try {
     event = JSON.parse(rawBody);
@@ -20,81 +25,98 @@ export async function POST(req) {
 
   const supabase = getServiceSupabase();
 
-  // Idempotency
+  // Idempotency: only a unique-violation means "already seen"
   const { error: insertErr } = await supabase.from("webhook_events").insert({
-    id: event.id,
+    id: eventId,
     event_type: event.event,
     payload: event,
   });
   if (insertErr) {
-    // Duplicate event id → already processed
-    return NextResponse.json({ ok: true, duplicate: true });
+    if (insertErr.code === "23505") {
+      return NextResponse.json({ ok: true, duplicate: true });
+    }
+    console.error("webhook_events insert failed:", insertErr);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 
-  const eventType = event.event;
+  try {
+    if (event.event === "payment.captured" || event.event === "order.paid") {
+      const payment = event.payload?.payment?.entity;
+      const orderId = payment?.order_id || event.payload?.order?.entity?.id;
+      if (!orderId) return NextResponse.json({ ok: true });
 
-  if (eventType === "payment.captured" || eventType === "order.paid") {
-    const payment = event.payload?.payment?.entity;
-    const order = event.payload?.order?.entity;
-    const orderId = payment?.order_id || order?.id;
-    if (!orderId) {
-      return NextResponse.json({ ok: true });
-    }
+      const { data: payRow, error: payErr } = await supabase
+        .from("payments")
+        .select("*, enrollments(*, batches(*))")
+        .eq("razorpay_order_id", orderId)
+        .single();
 
-    const { data: payRow } = await supabase
-      .from("payments")
-      .select("*, enrollments(*, batches(*))")
-      .eq("razorpay_order_id", orderId)
-      .single();
+      if (payErr || !payRow) {
+        throw new Error(`No payments row for order ${orderId}`);
+      }
 
-    if (!payRow) {
-      return NextResponse.json({ ok: true });
-    }
+      // Amount must match what we charged (paise)
+      if (payment?.amount != null && payment.amount !== payRow.amount_inr * 100) {
+        console.error("Amount mismatch", { orderId, got: payment.amount });
+        return NextResponse.json({ ok: true }); // needs manual review; retrying won't help
+      }
 
-    const enrollmentId = payRow.enrollment_id;
-    const paymentId = payment?.id || payRow.razorpay_payment_id || "";
+      const { data: confirmed, error: rpcErr } = await supabase.rpc(
+        "confirm_enrollment_seat",
+        {
+          p_enrollment_id: payRow.enrollment_id,
+          p_payment_id: payment?.id || payRow.razorpay_payment_id || "",
+          p_order_id: orderId,
+          p_amount: payRow.amount_inr,
+          p_raw: event,
+        }
+      );
+      if (rpcErr) throw rpcErr;
 
-    const { data: confirmed } = await supabase.rpc("confirm_enrollment_seat", {
-      p_enrollment_id: enrollmentId,
-      p_payment_id: paymentId,
-      p_order_id: orderId,
-      p_amount: payRow.amount_inr,
-      p_raw: event,
-    });
-
-    if (confirmed && payRow.enrollments) {
       const enr = payRow.enrollments;
-      try {
-        await sendEnrollmentConfirmation({
-          to: enr.parent_email,
-          parentName: enr.parent_name,
-          childName: enr.child_first_name,
-          batchName: enr.batches?.name || "AI Course",
-          startDate: enr.batches?.start_date || "",
-          amount: enr.batches?.price_inr || payRow.amount_inr,
+      if (confirmed && enr) {
+        // Respond to Razorpay first; send emails afterwards
+        after(async () => {
+          try {
+            await sendEnrollmentConfirmation({
+              to: enr.parent_email,
+              parentName: enr.parent_name,
+              childName: enr.child_first_name,
+              batchName: enr.batches?.name || "AI Course",
+              startDate: enr.batches?.start_date || "",
+              amount: enr.batches?.price_inr || payRow.amount_inr,
+            });
+            await sendAdminNotification({
+              parentName: enr.parent_name,
+              parentEmail: enr.parent_email,
+              childName: enr.child_first_name,
+              batchName: enr.batches?.name || "AI Course",
+              amount: enr.batches?.price_inr || payRow.amount_inr,
+            });
+          } catch (e) {
+            console.error("Confirmation email failed:", e);
+          }
         });
-        await sendAdminNotification({
-          parentName: enr.parent_name,
-          parentEmail: enr.parent_email,
-          childName: enr.child_first_name,
-          batchName: enr.batches?.name || "AI Course",
-          amount: enr.batches?.price_inr || payRow.amount_inr,
-        });
-      } catch {
-        // ignore email errors
       }
     }
-  }
 
-  if (eventType === "payment.failed") {
-    const payment = event.payload?.payment?.entity;
-    if (payment?.order_id) {
-      await supabase
-        .from("payments")
-        .update({ status: "failed", raw_payload: event })
-        .eq("razorpay_order_id", payment.order_id);
+    if (event.event === "payment.failed") {
+      const payment = event.payload?.payment?.entity;
+      if (payment?.order_id) {
+        // Never overwrite a payment that already succeeded
+        await supabase
+          .from("payments")
+          .update({ status: "failed", raw_payload: event })
+          .eq("razorpay_order_id", payment.order_id)
+          .eq("status", "created");
+      }
     }
-  }
 
-  return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true });
+  } catch (e) {
+    console.error("Webhook processing failed:", e);
+    // Let Razorpay retry: forget this event id so the retry isn't skipped
+    await supabase.from("webhook_events").delete().eq("id", eventId);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 }

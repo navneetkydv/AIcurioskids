@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import CookieConsent from "@/components/CookieConsent";
 import { UTMCapture } from "@/components/UTMCapture";
 import { MetaPixelLoader, GALoader } from "@/components/Analytics";
 

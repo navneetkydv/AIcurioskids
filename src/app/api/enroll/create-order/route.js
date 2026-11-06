@@ -10,7 +10,7 @@ export async function POST(req) {
     if (!parsed.success) {
       return NextResponse.json(
         { error: "Validation failed", details: parsed.error.flatten() },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (body.website) {
@@ -29,7 +29,10 @@ export async function POST(req) {
       .single();
 
     if (batchErr || !batch) {
-      return NextResponse.json({ error: "Batch not available" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Batch not available" },
+        { status: 400 },
+      );
     }
 
     if (batch.seat_limit !== null && batch.seats_taken >= batch.seat_limit) {
@@ -62,20 +65,20 @@ export async function POST(req) {
       .select("id")
       .single();
 
-   if (enrErr || !enrollment) {
-  console.error("Enrollment insert failed:", enrErr);
+    if (enrErr || !enrollment) {
+      console.error("Enrollment insert failed:", enrErr);
 
-  return NextResponse.json(
-    {
-      error: "Could not create enrollment",
-      details: enrErr?.message,
-      code: enrErr?.code,
-      hint: enrErr?.hint,
-      detailsFromDatabase: enrErr?.details,
-    },
-    { status: 500 }
-  );
-}
+      return NextResponse.json(
+        {
+          error: "Could not create enrollment",
+          details: enrErr?.message,
+          code: enrErr?.code,
+          hint: enrErr?.hint,
+          detailsFromDatabase: enrErr?.details,
+        },
+        { status: 500 },
+      );
+    }
 
     const amountPaise = batch.price_inr * 100;
     const order = await createRazorpayOrder({
@@ -88,7 +91,7 @@ export async function POST(req) {
     });
 
     // Store payment row
-    await supabase.from("payments").insert({
+    const { error: payErr } = await supabase.from("payments").insert({
       enrollment_id: enrollment.id,
       razorpay_order_id: order.id,
       amount_inr: batch.price_inr,
@@ -96,7 +99,21 @@ export async function POST(req) {
       status: "created",
     });
 
+    if (payErr) {
+      console.error("Payment insert failed:", {
+        message: payErr.message,
+        code: payErr.code,
+        details: payErr.details,
+        hint: payErr.hint,
+      });
+      return NextResponse.json(
+        { error: "Could not record payment. Please try again." },
+        { status: 500 },
+      );
+    }
+
     return NextResponse.json({
+      // Return order details to client from this client will make payment request to razorpay
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
