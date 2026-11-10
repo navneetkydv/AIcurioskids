@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DownloadBrochureButton from "@/components/DownloadResourceButton";
 
 export const metadata = {
   title: "The 4-Week Live AI Course",
@@ -15,7 +16,10 @@ const facts = [
   // { label: "Next batch", value: "[date]" },
   { label: "Bonus", value: "Complete workbook FREE (delivered at  your home)" },
 ];
-
+const PRICE_ORIGINAL = process.env.NEXT_PUBLIC_PRICE_ORIGINAL_HOME || 10000;
+const PRICE_OFFER = process.env.NEXT_PUBLIC_PRICE_OFFER_HOME || 2500;
+const SAVE_PERCENT = Math.round((1 - PRICE_OFFER / PRICE_ORIGINAL) * 100);
+const formatINR = (n) => `₹${n.toLocaleString("en-IN")}`;
 const weeks = [
   {
     week: 1,
@@ -35,10 +39,21 @@ const weeks = [
   {
     week: 4,
     title: "Stay safe, think ahead",
-    items: ["Privacy", "Wrong answers", "Responsible use", "Future jobs and opportunities"],
+    items: [
+      "Privacy",
+      "Wrong answers",
+      "Responsible use",
+      "Future jobs and opportunities",
+    ],
   },
 ];
-
+const trustItems = [
+  "Live classes",
+  "No coding required",
+  "40+ hands-on activities",
+  "4 weeks program",
+  "Designed by engineering graduates",
+];
 const learnings = [
   "Understand AI",
   "Talk to AI",
@@ -82,49 +97,47 @@ export default function CoursePage() {
       <section className="bg-primary text-white py-14 md:py-20">
         <div className="container-wide">
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-4">
-            The 4-Week Live AI Course
+            The 4-Week Live AI Classes
           </h1>
-          <p className="text-lg text-white/85 max-w-2xl mb-8">
-            Live classes for Class 4–9 students. Think clearly about AI, practice safely,
-            and create with confidence. Complete workbook included free.
+          <p className="text-lg text-white/85 mb-4">
+            Four weeks to think smarter, create with AI, and build the skills your child needs for an AI-powered future.
           </p>
+          <div className="mb-8 container-narrow ml-0 p-0">
+            <ul className="flex flex-wrap gap-2.5">
+              {trustItems.map((t) => (
+                <li
+                  key={t}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 rounded-full bg-accent"
+                  />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* <p className="text-lg text-white/85 max-w-2xl mb-8">
+            Live classes for Class 4–9 students. Think clearly about AI,
+            practice safely, and create with confidence. Complete workbook
+            included FREE.
+          </p> */}
           <Link href="/enroll" className="btn-primary">
             Reserve Your Child&apos;s Seat
           </Link>
-        </div>
-      </section>
-
-      <section className="py-12">
-        <div className="container-wide">
-          <div className="card overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <tbody>
-                {facts.map((f) => (
-                  <tr key={f.label} className="border-b border-gray-100 last:border-0">
-                    <th className="py-3 pr-4 font-medium text-muted w-1/3">
-                      {f.label}
-                    </th>
-                    <td className="py-3 font-semibold">{f.value}</td>
-                  </tr>
-                ))}
-                <tr>
-                  <th className="py-3 pr-4 font-medium text-muted">Price</th>
-                  <td className="py-3 font-semibold text-lg">[₹X]</td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="mt-6 text-center">
-              <Link href="/enroll" className="btn-primary">
-                Enroll Now
-              </Link>
-            </div>
-          </div>
+          <DownloadBrochureButton
+            label="Download brochure"
+            className="btn-secondary-light md:ml-4 mt-4 text-white "
+          />
         </div>
       </section>
 
       <section className="section-tint py-14">
         <div className="container-wide">
-          <h2 className="text-2xl md:text-3xl text-center mb-10">Week by week</h2>
+          <h2 className="text-2xl md:text-3xl text-center mb-10">
+            The 4-Week Roadmap
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {weeks.map((w) => (
               <div key={w.week} className="card">
@@ -148,7 +161,9 @@ export default function CoursePage() {
 
       <section className="py-14">
         <div className="container-wide">
-          <h2 className="text-2xl md:text-3xl text-center mb-8">What your child will learn</h2>
+          <h2 className="text-2xl md:text-3xl text-center mb-8">
+            What your child will learn
+          </h2>
           <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
             {learnings.map((l) => (
               <span
@@ -164,7 +179,9 @@ export default function CoursePage() {
 
       <section className="section-tint py-14">
         <div className="container-wide max-w-2xl">
-          <h2 className="text-2xl md:text-3xl text-center mb-8">What&apos;s included</h2>
+          <h2 className="text-2xl md:text-3xl text-center mb-8">
+            What&apos;s included
+          </h2>
           <ul className="space-y-3">
             {included.map((item) => (
               <li key={item} className="flex gap-3 items-start">
@@ -180,27 +197,74 @@ export default function CoursePage() {
         <div className="container-wide max-w-2xl">
           <h2 className="text-2xl md:text-3xl mb-4">Who it is for</h2>
           <p className="prose-muted mb-6">
-            Parents of children in Class 4-9 in India who want their child to understand AI —
-            not just use it. No prior coding knowledge is required. A laptop or tablet with a
-            stable internet connection is enough.
+            Parents of children in Class 4-9 in India who want their child to
+            understand AI — not just use it. No prior coding knowledge is
+            required. A laptop or tablet with a stable internet connection is
+            enough.
           </p>
           <h2 className="text-2xl md:text-3xl mb-4 mt-10">Why we built this</h2>
           <p className="prose-muted">
-            We studied AI for 4+ years in engineering and noticed children use AI daily,
-            but few get taught how it works or how to question it. This course closes that gap.
+            We studied AI for 4+ years in engineering and noticed children use
+            AI daily, but few get taught how it works or how to question it.
+            This course closes that gap.
           </p>
           {/* <p className="text-sm text-[var(--color-muted)] mt-6">
             [Testimonials placeholder — will be replaced with real parent quotes.]
           </p> */}
         </div>
       </section>
+      <section className="py-12">
+        <div className="container-wide">
+          <div className="card overflow-hidden">
+            <table className="w-full text-left text-sm">
+              <tbody>
+                {facts.map((f) => (
+                  <tr
+                    key={f.label}
+                    className="border-b border-gray-100 last:border-0"
+                  >
+                    <th className="py-3 pr-4 font-medium text-muted w-1/3">
+                      {f.label}
+                    </th>
+                    <td className="py-3 font-semibold">{f.value}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <th className="py-3 pr-4 font-medium text-muted">Price</th>
+                  <td className="py-3">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span className="text-muted line-through text-base font-normal">
+                        {formatINR(PRICE_ORIGINAL)}
+                      </span>
 
+                      <span className="font-semibold text-lg text-primary">
+                        {formatINR(PRICE_OFFER)}
+                      </span>
+
+                      <span className="text-sm font-medium text-green-700">
+                        {SAVE_PERCENT}% OFF
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <div className="mt-6 text-center">
+              <Link href="/enroll" className="btn-primary">
+                Enroll Now
+              </Link>
+            </div> */}
+          </div>
+        </div>
+      </section>
       <section className="section-tint py-16">
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl mb-4">
             Give your child&apos;s curiosity a new direction.
           </h2>
-          <p className="prose-muted mb-8">Complete workbook included FREE with enrollment.</p>
+          <p className="prose-muted mb-8">
+            Complete workbook included FREE with enrollment.
+          </p>
           <Link href="/enroll" className="btn-primary">
             Enroll Now
           </Link>

@@ -7,6 +7,10 @@ export const leadSchema = z.object({
     .string()
     .regex(/^(\+91)?[6-9]\d{9}$/, "Valid Indian mobile number required"),
   message: z.string().max(1000).optional(),
+  resourceType: z
+    .enum(["course-brochure", "book-sample"])
+    .optional()
+    .default("course-brochure"),
   website: z.string().max(0).optional(), // honeypot
 });
 

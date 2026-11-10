@@ -46,7 +46,8 @@ export default function EnrollPage() {
     }
     load();
   }, []);
-
+  
+  // run on payemt form submission
   async function onSubmit(data) {
     setStatus("creating");
     setErrorMsg("");
@@ -346,7 +347,7 @@ export default function EnrollPage() {
             </div> */}
 
             {errorMsg && <p className="text-red-600 text-sm">{errorMsg}</p>}
-
+            {/* payment button */}
             <div className="pt-2">
               <button
                 type="submit"

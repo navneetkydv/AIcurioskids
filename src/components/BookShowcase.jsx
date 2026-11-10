@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DownloadResourceButton from "./DownloadResourceButton";
 
 const amazonUrl = process.env.NEXT_PUBLIC_AMAZON_URL;
 const tags = [
@@ -16,25 +17,35 @@ export default function BookShowcase() {
     >
       <div className="container-wide grid items-center gap-12 md:grid-cols-2 md:gap-16">
         {/* Book image */}
-        <div className="order-1 flex justify-center md:order-2">
-          <div className="relative">
-            <div className="book-float">
-              <Image
-                src="/cover.jpg"
-                alt="Cover of our book"
-                width={420}
-                height={560}
-                sizes="(min-width: 768px) 420px, 70vw"
-                className="h-auto w-[220px] rounded-md shadow-2xl sm:w-[280px] md:w-[360px]"
-              />
-            </div>
-            {/* Shadow that breathes with the float */}
-            <div
-              aria-hidden="true"
-              className="book-shadow mx-auto mt-6 h-4 w-3/4 rounded-full bg-black/20 blur-md"
-            />
-          </div>
-        </div>
+       {/* Book image */}
+<div className="order-1 flex justify-center md:order-2">
+  <div className="relative flex flex-col items-center">
+    <div className="book-float">
+      <Image
+        src="/cover.jpg"
+        alt="Cover of our book"
+        width={420}
+        height={560}
+        sizes="(min-width: 768px) 420px, 70vw"
+        className="h-auto w-[220px] rounded-md shadow-2xl sm:w-[280px] md:w-[360px]"
+      />
+    </div>
+
+    {/* Shadow that breathes with the float */}
+    <div
+      aria-hidden="true"
+      className="book-shadow mx-auto mt-6 h-4 w-3/4 rounded-full bg-black/20 blur-md"
+    />
+
+    <DownloadResourceButton
+      resourceType="book-sample"
+      fileUrl="/book-sample.pdf"
+      fileName="book-sample.pdf"
+      label="Download FREE book Sample"
+      className=" inline-block text-sm text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+    />
+  </div>
+</div>
 
         {/* Text + actions */}
         <div className="order-2 text-center md:order-1 md:text-left">
@@ -94,6 +105,7 @@ export default function BookShowcase() {
               </a>
             )}
           </div>
+          
         </div>
       </div>
     </section>

@@ -1,11 +1,18 @@
+
 "use client";
 
 import { useState } from "react";
 import { getStoredUTM } from "@/components/UTMCapture";
 
-export default function DownloadBrochureButton({
-  label = "Download Brochure",
+export default function DownloadResourceButton({
+  label = "Download",
   className = "btn-primary",
+  title = "Download resource",
+  description = "Share your details and we'll start the download.",
+  fileUrl,
+  fileName = "brochure.pdf",
+  endpoint = "/api/leads/brochure",
+  resourceType = "brochure",
 }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -22,13 +29,14 @@ export default function DownloadBrochureButton({
     try {
       const utm = getStoredUTM();
 
-      const res = await fetch("/api/leads/brochure", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
           email,
           phone,
+          resourceType,
           ...utm,
           website: "",
         }),
@@ -43,8 +51,8 @@ export default function DownloadBrochureButton({
       }
 
       const a = document.createElement("a");
-      a.href = data.downloadUrl || "/brochure.pdf";
-      a.download = "AI-Course-Brochure.pdf";
+      a.href = fileUrl || data.downloadUrl;
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -58,6 +66,7 @@ export default function DownloadBrochureButton({
         setEmail("");
         setPhone("");
       }, 1200);
+
     } catch {
       setError("Network error. Please try again.");
       setStatus("error");
@@ -85,11 +94,11 @@ export default function DownloadBrochureButton({
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-1">
-              Download brochure
+              {title}
             </h3>
 
             <p className="text-sm text-[var(--color-muted)] mb-5">
-              Share your details and we'll start the download.
+              {description}
             </p>
 
             {status === "success" ? (
@@ -124,11 +133,12 @@ export default function DownloadBrochureButton({
                 </div>
 
                 <div>
-                  <label className="block text-sm text-black   font-medium mb-1">
+                  <label className="block text-sm text-black font-medium mb-1">
                     Mobile (+91)
                   </label>
                   <input
                     required
+                    type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="9876543210"

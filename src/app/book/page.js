@@ -30,7 +30,7 @@ export default function BookPage() {
             Prefer to learn at home? Get the book.
           </h1>
           <p className="text-lg text-white/85 mb-8">
-            A beginner-friendly guide for Class 5–8 students. 8 chapters, 40+
+            A beginner-friendly guide for Class 4–9 students. 8 chapters, 40+
             hands-on activities, creative challenges. No coding required.
             Suitable for independent learning, learning with parents, or
             classroom use.

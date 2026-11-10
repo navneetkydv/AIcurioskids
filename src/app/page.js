@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import UpcomingBatches from "@/components/UpcomingBatches";
 import BookShowcase from "@/components/BookShowcase";
-import DownloadBrochureButton from "@/components/DownloadBrochureButton";
+import DownloadBrochureButton from "@/components/DownloadResourceButton";
 import Mentors from "@/components/Mentors";
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/QuickAns";
@@ -180,6 +180,10 @@ export default function HomePage() {
 
                 <DownloadBrochureButton
                   label="Download brochure"
+                  title="Download Course Brochure"
+                  fileUrl="/brochure.pdf"
+                  fileName="Brochure.pdf"
+                  resourceType="course-brochure"
                   className="mt-4 inline-block text-sm text-white/70 underline underline-offset-4 transition-colors hover:text-white"
                 />
                 <Link
