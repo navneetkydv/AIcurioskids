@@ -42,10 +42,10 @@ export default function AdminLoginPage() {
       >
         <h1 className="text-xl font-semibold text-primary">Admin login</h1>
         <p className="text-sm text-muted">
-          Protected area. Use the password from your server env.
+          Protected area. Please sign in with your admin credentials.
         </p>
         <div>
-          <label className="block text-sm font-medium mb-1">Email (optional allowlist)</label>
+          <label className="block text-sm font-medium mb-1">Email</label>
           <input
             type="email"
             value={email}

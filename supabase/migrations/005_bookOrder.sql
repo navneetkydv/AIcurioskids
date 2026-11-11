@@ -30,3 +30,12 @@ create index book_orders_status_idx on public.book_orders (status, created_at de
 
 -- No policies on purpose: only your server (service-role key) can read or write.
 alter table public.book_orders enable row level security;
+
+
+
+alter table public.book_orders
+  add column if not exists courier text,
+  add column if not exists shipped_at timestamptz,
+  add column if not exists delivered_at timestamptz,
+  add column if not exists crm_notes text,
+  add column if not exists updated_at timestamptz not null default now();

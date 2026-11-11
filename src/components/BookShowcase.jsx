@@ -93,7 +93,7 @@ export default function BookShowcase({ showBookLink = false }) {
                 <path d="M6 7h12l1 14H5L6 7Z" />
                 <path d="M9 7a3 3 0 0 1 6 0" />
               </svg>
-              Buy the Book
+              Order Now
             </Link>
 
             {amazonUrl && (

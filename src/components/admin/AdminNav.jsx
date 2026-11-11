@@ -8,6 +8,7 @@ const links = [
   { href: "/admin/batches", label: "Courses / Batches" },
   { href: "/admin/enrollments", label: "Enrollments" },
   { href: "/admin/leads", label: "Leads CRM" },
+  { href: "/admin/orders", label: "Book Orders" },
 ];
 
 export default function AdminNav({ email }) {
