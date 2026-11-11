@@ -266,7 +266,7 @@ export default function HomePage() {
         </div>
       </section>
       <UpcomingBatches />
-      <BookShowcase />
+      <BookShowcase  showBookLink={true} />
       <section className="section-tint py-14 md:py-20">
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl text-center mb-3">

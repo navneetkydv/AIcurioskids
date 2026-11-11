@@ -9,7 +9,7 @@ const tags = [
   "40+ activities",
   "No coding required",
 ];
-export default function BookShowcase() {
+export default function BookShowcase({ showBookLink = false }) {
   return (
     <section
       className="py-16 md:py-24 bg-blue-50"
@@ -17,35 +17,35 @@ export default function BookShowcase() {
     >
       <div className="container-wide grid items-center gap-12 md:grid-cols-2 md:gap-16">
         {/* Book image */}
-       {/* Book image */}
-<div className="order-1 flex justify-center md:order-2">
-  <div className="relative flex flex-col items-center">
-    <div className="book-float">
-      <Image
-        src="/cover.jpg"
-        alt="Cover of our book"
-        width={420}
-        height={560}
-        sizes="(min-width: 768px) 420px, 70vw"
-        className="h-auto w-[220px] rounded-md shadow-2xl sm:w-[280px] md:w-[360px]"
-      />
-    </div>
+        {/* Book image */}
+        <div className="order-1 flex justify-center md:order-2">
+          <div className="relative flex flex-col items-center">
+            <div className="book-float">
+              <Image
+                src="/cover.jpg"
+                alt="Cover of our book"
+                width={420}
+                height={560}
+                sizes="(min-width: 768px) 420px, 70vw"
+                className="h-auto w-[220px] rounded-md shadow-2xl sm:w-[280px] md:w-[360px]"
+              />
+            </div>
 
-    {/* Shadow that breathes with the float */}
-    <div
-      aria-hidden="true"
-      className="book-shadow mx-auto mt-6 h-4 w-3/4 rounded-full bg-black/20 blur-md"
-    />
+            {/* Shadow that breathes with the float */}
+            <div
+              aria-hidden="true"
+              className="book-shadow mx-auto mt-6 h-4 w-3/4 rounded-full bg-black/20 blur-md"
+            />
 
-    <DownloadResourceButton
-      resourceType="book-sample"
-      fileUrl="/book-sample.pdf"
-      fileName="book-sample.pdf"
-      label="Download FREE book Sample"
-      className=" inline-block text-sm text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
-    />
-  </div>
-</div>
+            <DownloadResourceButton
+              resourceType="book-sample"
+              fileUrl="/book-sample.pdf"
+              fileName="book-sample.pdf"
+              label="Download FREE book Sample"
+              className=" inline-block text-sm text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+            />
+          </div>
+        </div>
 
         {/* Text + actions */}
         <div className="order-2 text-center md:order-1 md:text-left">
@@ -75,8 +75,25 @@ export default function BookShowcase() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center md:justify-start">
-            <Link href="/book" className="btn-primary text-center">
-              Explore Book
+            <Link
+              href="/book/order"
+              className="btn-primary text-center inline-flex items-center justify-center gap-2"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M6 7h12l1 14H5L6 7Z" />
+                <path d="M9 7a3 3 0 0 1 6 0" />
+              </svg>
+              Buy the Book
             </Link>
 
             {amazonUrl && (
@@ -105,7 +122,16 @@ export default function BookShowcase() {
               </a>
             )}
           </div>
-          
+          {showBookLink && (
+            <div className="mt-4 ml-2 text-left">
+              <Link
+                href="/book"
+                className="text-sm font-medium text-[var(--color-primary)] hover:underline"
+              >
+                Learn more about the book →
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </section>

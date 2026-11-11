@@ -29,7 +29,7 @@ export async function PATCH(req, { params }) {
     return NextResponse.json(
       {
         error:
-          "Update failed. Run the CRM migration (add crm_status, crm_notes columns) if not done.",
+          "Update failed.",
         details: error.message,
         code: error.code,
       },

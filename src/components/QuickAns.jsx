@@ -66,10 +66,7 @@ const faqs = [
     q: "What rewards or recognition will students receive?",
     a: "All students will receive a Certificate of Participation upon successful completion of the program. Additionally, selected students may get an opportunity to be featured on the website, and special prizes will be awarded to outstanding performers based on overall performance.",
   },
-  {
-    q: "Is there a refund policy?",
-    a: "No refunds will be provided once payment is completed, except in case of cancellation of the Program by TOI.",
-  },
+ 
 ];
 
 export default function FAQ() {

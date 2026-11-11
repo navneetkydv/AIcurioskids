@@ -1,7 +1,11 @@
 import { NextResponse, after } from "next/server";
 import { getServiceSupabase } from "@/lib/supabase";
 import { verifyWebhookSignature } from "@/lib/razorpay";
-import { sendEnrollmentConfirmation, sendAdminNotification } from "@/lib/resend";
+import {
+  sendEnrollmentConfirmation,
+  sendAdminNotification,
+} from "@/lib/resend";
+import { confirmBookOrder, sendBookEmails } from "@/lib/bookOrders";
 
 export async function POST(req) {
   const rawBody = await req.text();
@@ -44,7 +48,33 @@ export async function POST(req) {
       const payment = event.payload?.payment?.entity;
       const orderId = payment?.order_id || event.payload?.order?.entity?.id;
       if (!orderId) return NextResponse.json({ ok: true });
+      // --- Book orders ---
+      const { data: bookOrder, error: bookErr } = await supabase
+        .from("book_orders")
+        .select("*")
+        .eq("razorpay_order_id", orderId)
+        .maybeSingle();
+      if (bookErr) throw bookErr;
 
+      if (bookOrder) {
+        if (
+          payment?.amount != null &&
+          payment.amount !== bookOrder.amount_inr * 100
+        ) {
+          console.error("Book order amount mismatch", {
+            orderId,
+            got: payment.amount,
+          });
+          return NextResponse.json({ ok: true }); // needs manual review
+        }
+        const confirmed = await confirmBookOrder(supabase, {
+          bookOrderId: bookOrder.id,
+          paymentId: payment?.id,
+        });
+        if (confirmed) after(() => sendBookEmails(confirmed));
+        return NextResponse.json({ ok: true });
+      }
+      // --- existing enrollment flow continues below ---
       const { data: payRow, error: payErr } = await supabase
         .from("payments")
         .select("*, enrollments(*, batches(*))")
@@ -56,7 +86,10 @@ export async function POST(req) {
       }
 
       // Amount must match what we charged (paise)
-      if (payment?.amount != null && payment.amount !== payRow.amount_inr * 100) {
+      if (
+        payment?.amount != null &&
+        payment.amount !== payRow.amount_inr * 100
+      ) {
         console.error("Amount mismatch", { orderId, got: payment.amount });
         return NextResponse.json({ ok: true }); // needs manual review; retrying won't help
       }
@@ -69,7 +102,7 @@ export async function POST(req) {
           p_order_id: orderId,
           p_amount: payRow.amount_inr,
           p_raw: event,
-        }
+        },
       );
       if (rpcErr) throw rpcErr;
 
