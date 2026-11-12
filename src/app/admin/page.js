@@ -43,6 +43,9 @@ export default function AdminDashboard() {
     { label: "Pending payments", value: stats?.pending ?? "—", href: "/admin/enrollments?status=pending" },
     { label: "Total leads", value: stats?.totalLeads ?? "—", href: "/admin/leads" },
     { label: "Open batches", value: stats?.openBatches ?? "—", href: "/admin/batches" },
+    { label: "Book orders", value: stats?.bookOrders ?? "—", href: "/admin/orders" },
+    { label: "Traffic", value: stats?.traffic ?? "—", href: "/admin/traffic" },
+
   ];
 
   return (

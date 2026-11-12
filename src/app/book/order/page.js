@@ -1,12 +1,11 @@
 import BookOrderForm from "@/components/BookOrderForm";
-import { Truck, PackageCheck, ShieldCheck,MapPin } from "lucide-react";
+import { Truck, PackageCheck, ShieldCheck, MapPin } from "lucide-react";
 import {
   BOOK_TITLE,
   BOOK_PRICE_INR,
   BOOK_OFFER_PRICE_INR,
   BOOK_SAVE_PERCENT,
 } from "@/lib/book";
-
 
 export const metadata = {
   title: "Order the Book",
@@ -48,9 +47,9 @@ export default function BookOrderPage() {
               <span>FREE shipping</span>
             </li>
             <li className="flex items-center gap-2">
-    <MapPin className="h-4 w-4 shrink-0" aria-hidden />
-    <span>Pan-India delivery</span>
-  </li>
+              <MapPin className="h-4 w-4 shrink-0" aria-hidden />
+              <span>Pan-India delivery</span>
+            </li>
             <li className="flex items-center gap-2">
               <PackageCheck className="h-4 w-4 shrink-0" aria-hidden />
               <span>Delivery in 4-5 days</span>

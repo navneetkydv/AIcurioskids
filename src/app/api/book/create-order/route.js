@@ -50,7 +50,7 @@ export async function POST(req) {
     }
 
     const rzp = await createRazorpayOrder({
-      amountInPaise: BOOK_PRICE_INR * 100,
+      amountInPaise: BOOK_OFFER_PRICE_INR * 100,
       receipt: `book_${order.order_no}`,
       notes: { type: "book", book_order_id: order.id },
     });

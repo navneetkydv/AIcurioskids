@@ -47,7 +47,7 @@ export default function AdminLeadsPage() {
       body: JSON.stringify({ crm_status }),
     });
     if (!res.ok) {
-      alert("Could not update status. Run the CRM SQL migration first.");
+      alert("Could not update status.");
       return;
     }
     await load();
@@ -60,7 +60,7 @@ export default function AdminLeadsPage() {
       body: JSON.stringify({ crm_notes: notesDraft[id] ?? "" }),
     });
     if (!res.ok) {
-      // alert("Could not save notes. Run the CRM SQL migration first.");
+      alert("Could not save notes.");
       return;
     }
     await load();

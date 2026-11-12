@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { UTMCapture } from "@/components/UTMCapture";
+import VisitTracker from "@/components/VisitTracker";
 import { MetaPixelLoader, GALoader } from "@/components/Analytics";
 
 const fraunces = Fraunces({
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-screen flex flex-col antialiased">
         <UTMCapture />
+        <VisitTracker />
         <MetaPixelLoader />
         <GALoader />
         <Header />

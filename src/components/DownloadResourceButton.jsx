@@ -10,7 +10,7 @@ export default function DownloadResourceButton({
   title = "Download resource",
   description = "Share your details and we'll start the download.",
   fileUrl,
-  fileName = "brochure.pdf",
+  fileName = "AIforStudents.pdf",
   endpoint = "/api/leads/brochure",
   resourceType = "brochure",
 }) {
